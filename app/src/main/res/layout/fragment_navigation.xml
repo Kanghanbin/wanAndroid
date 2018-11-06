@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ui.fragment.HomeFragment">
+
+    <q.rorbin.verticaltablayout.VerticalTabLayout
+        android:id="@+id/vtl_nav"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="match_parent"
+        android:background="@color/lightgray"
+        app:indicator_color="@color/colorPrimary"
+        app:indicator_width="@dimen/dp_2"
+        app:indicator_gravity="fill"
+        app:tab_margin="@dimen/dp_10"
+        app:tab_height="@dimen/dp_50"
+        app:tab_mode="scrollable"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

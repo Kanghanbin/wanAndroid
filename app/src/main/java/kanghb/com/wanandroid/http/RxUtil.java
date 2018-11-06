@@ -45,7 +45,7 @@ public class RxUtil {
                 return upstream.flatMap(new Function<BaseResponse<T>, Flowable<T>>() {
                     @Override
                     public Flowable<T> apply(BaseResponse<T> tBaseResponse) throws Exception {
-                        if(tBaseResponse.getErrorCode() == 0){
+                        if(tBaseResponse.getErrorCode() == 0 && tBaseResponse.getData() != null){
                             return createData(tBaseResponse.getData());
                         }else {
                             return Flowable.error(new ApiException(tBaseResponse.getErrorMsg(),tBaseResponse.getErrorCode()));

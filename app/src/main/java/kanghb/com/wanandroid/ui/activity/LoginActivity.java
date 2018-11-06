@@ -1,4 +1,4 @@
-package kanghb.com.wanandroid.ui.login;
+package kanghb.com.wanandroid.ui.activity;
 
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +12,6 @@ import android.widget.ScrollView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import kanghb.com.wanandroid.ui.main.MainActivity;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseMvpActivity;
 import kanghb.com.wanandroid.contract.LoginContract;

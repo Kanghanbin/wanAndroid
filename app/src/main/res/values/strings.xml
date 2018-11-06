@@ -23,4 +23,10 @@
     <string name="about">关于</string>
     <string name="drawer_open">打开</string>
     <string name="drawer_close">关闭</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="use">常用</string>
+    <string name="hotsearch">热搜</string>
+    <string name="banner_fail">获取banner错误</string>
 </resources>

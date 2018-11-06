@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SnackbarUtils;
 
+
 /**
  * 创建时间：2018/10/31
  * 编写人：kanghb
@@ -19,10 +20,11 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initPresenter();
         if(mPresenter != null){
             mPresenter.attachView(this);
         }
-        initPresenter();
+
     }
 
     @Override

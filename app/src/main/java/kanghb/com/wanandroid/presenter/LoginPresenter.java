@@ -40,7 +40,7 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
         addSubscribe(apiService.login(username, password)
                 .compose(RxUtil.<BaseResponse<UserBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<UserBean>handleResult())
-                .subscribeWith(new BaseSubscriber<UserBean>(mView, MyApplication.getInstance().getString(R.string.login_fail)) {
+                .subscribeWith(new BaseSubscriber<UserBean>(mView) {
                     @Override
                     public void onNext(UserBean userBean) {
                         mView.showToast("登录成功");
