@@ -64,6 +64,7 @@ public class NavigationFragment extends BaseListFragment<NavigationPresenter> im
         linearLayoutManager = new LinearLayoutManager(mContext);
         rvNav.setLayoutManager(linearLayoutManager);
         rvNav.setAdapter(adapter);
+        showLoading();
         mPresenter.getNavigation();
         vtlNav.addOnTabSelectedListener(new VerticalTabLayout.OnTabSelectedListener() {
             @Override
@@ -141,6 +142,8 @@ public class NavigationFragment extends BaseListFragment<NavigationPresenter> im
 
     @Override
     public void showNavigationList(final List<NavigationBean> navigationBeanList) {
+        closeLoading();
+        showSuccess();
         vtlNav.setTabAdapter(new TabAdapter() {
             @Override
             public int getCount() {

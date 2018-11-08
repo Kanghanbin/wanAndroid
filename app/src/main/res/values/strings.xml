@@ -29,4 +29,5 @@
     <string name="use">常用</string>
     <string name="hotsearch">热搜</string>
     <string name="banner_fail">获取banner错误</string>
+    <string name="shareView">shareView</string>
 </resources>

@@ -50,4 +50,12 @@ public interface ApiService {
 
     @GET("/project/list/{page}/json")
     Flowable<BaseResponse<ArticleListBean>> getProjectArticleList(@Path("page") int page, @Query("cid") int cid);
+
+    @POST("/lg/collect/{id}/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<String>> addCollect(@Path("id") int id);
+
+    @POST("/lg/uncollect_originId/{id}/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<String>> unCollect(@Path("id") int id);
 }

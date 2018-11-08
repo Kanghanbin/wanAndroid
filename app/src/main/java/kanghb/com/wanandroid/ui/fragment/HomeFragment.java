@@ -1,14 +1,16 @@
 package kanghb.com.wanandroid.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -22,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseListFragment;
 import kanghb.com.wanandroid.contract.HomeContract;
@@ -31,6 +31,8 @@ import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 import kanghb.com.wanandroid.model.bean.BannerBean;
 import kanghb.com.wanandroid.presenter.HomePresenter;
+import kanghb.com.wanandroid.ui.activity.ArticleDetailActivity;
+import kanghb.com.wanandroid.ui.activity.ProjectDetailActivity;
 import kanghb.com.wanandroid.ui.adapter.ArticleAdapter;
 import kanghb.com.wanandroid.util.GlideImageLoader;
 
@@ -38,7 +40,7 @@ import static kanghb.com.wanandroid.util.Constant.ARG_PARAM1;
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM2;
 
 
-public class HomeFragment extends BaseListFragment<HomePresenter> implements HomeContract.View {
+public class HomeFragment extends BaseListFragment<HomePresenter> implements HomeContract.View,BaseQuickAdapter.OnItemClickListener{
 
 
     @BindView(R.id.rv_main)
@@ -71,6 +73,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
         LinearLayout llBanner = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.view_header_banner, null);
         banner = llBanner.findViewById(R.id.banner);
         adapter = new ArticleAdapter(R.layout.item_article, articleBeanList);
+        adapter.setOnItemClickListener(this);
         rvMain.setLayoutManager(new LinearLayoutManager(mContext));
         //banner 跟随rvmain一起滑动，所以不放在xml里面
         adapter.addHeaderView(llBanner);
@@ -176,4 +179,11 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
     }
 
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,getString(R.string.shareView));
+        Intent intent = new Intent(mContext, ArticleDetailActivity.class);
+        intent.putExtra(ARG_PARAM1,articleBeanList.get(position));
+        startActivity(intent,activityOptionsCompat.toBundle());
+    }
 }

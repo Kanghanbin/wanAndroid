@@ -9,7 +9,9 @@
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     app:cardCornerRadius="@dimen/dp_10"
-    android:layout_margin="@dimen/dp_5">
+    android:layout_marginLeft="@dimen/dp_5"
+    android:layout_marginRight="@dimen/dp_5"
+    android:layout_marginTop="@dimen/dp_5">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package kanghb.com.wanandroid.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * 编写人：kanghb
  * 功能描述：
  */
-public class ArticleBean {
+public class ArticleBean implements Serializable {
 
     /**
      * apkLink :
@@ -243,7 +244,7 @@ public class ArticleBean {
         this.tags = tags;
     }
 
-    public static class TagsBean {
+    public static class TagsBean implements Serializable{
         /**
          * name : 项目
          * url : /project/list/1?cid=294

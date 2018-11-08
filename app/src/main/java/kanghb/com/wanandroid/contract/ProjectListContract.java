@@ -15,11 +15,15 @@ import kanghb.com.wanandroid.model.bean.ProjectBean;
 public interface ProjectListContract {
     interface View extends BaseView {
 
-        void showProjectArticleResult(ArticleListBean articleListBean);
+        void showRefreshProjectArticleResult(ArticleListBean articleListBean);
+
+        void showMoreProjectArticleResult(ArticleListBean articleListBean);
     }
 
     interface Presenter extends BasePresenter<View> {
 
-        void getProjectArticleList(int page, int cid);
+        void getRefreshProjectArticleList(int page, int cid);
+
+        void getMoreProjectArticleList(int page, int cid);
     }
 }

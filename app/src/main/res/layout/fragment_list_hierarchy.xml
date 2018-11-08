@@ -7,13 +7,12 @@
     android:background="@color/lightgray"
     android:orientation="vertical"
     tools:context=".ui.fragment.HomeFragment">
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlHeaderHeight="@dimen/dp_100"
-        app:srlPrimaryColor="@color/colorPrimary">
+        app:srlPrimaryColor="@color/colorPrimary"
+        app:srlHeaderHeight="@dimen/dp_100">
 
         <com.scwang.smartrefresh.header.DeliveryHeader
             android:layout_width="match_parent"
@@ -23,13 +22,14 @@
             android:id="@+id/rv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
             android:background="@color/lightgray"></android.support.v7.widget.RecyclerView>
-
         <com.scwang.smartrefresh.layout.footer.BallPulseFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:srlNormalColor="@color/colorPrimary"
             app:srlAnimatingColor="@color/colorPrimary"
-            app:srlNormalColor="@color/colorPrimary"></com.scwang.smartrefresh.layout.footer.BallPulseFooter>
-
+            ></com.scwang.smartrefresh.layout.footer.BallPulseFooter>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

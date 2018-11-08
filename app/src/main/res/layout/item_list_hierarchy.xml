@@ -8,8 +8,7 @@
     android:layout_marginLeft="@dimen/dp_5"
     android:layout_marginRight="@dimen/dp_5"
     android:layout_marginTop="@dimen/dp_5"
-    android:elevation="@dimen/dp_8"
-    android:transitionName="@string/shareView"
+    android:elevation="5dp"
     android:foreground="?attr/selectableItemBackground"
     android:background="@color/white">
 

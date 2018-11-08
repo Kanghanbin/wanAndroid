@@ -47,7 +47,9 @@ public abstract class BaseActivity extends SupportActivity {
     protected void setToolBar(Toolbar toolbar, String title) {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
+        //给左上角图标的左边加上一个返回的图标
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //使左上角图标是否显示，如果设成false，则没有程序图标
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

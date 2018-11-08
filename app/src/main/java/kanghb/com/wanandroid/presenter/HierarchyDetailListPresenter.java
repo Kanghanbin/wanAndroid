@@ -1,55 +1,50 @@
 package kanghb.com.wanandroid.presenter;
 
-import java.util.List;
-
 import kanghb.com.wanandroid.base.RxPresenter;
-import kanghb.com.wanandroid.contract.ProjectContract;
-import kanghb.com.wanandroid.contract.ProjectListContract;
+import kanghb.com.wanandroid.contract.HierarchyDetailListContract;
 import kanghb.com.wanandroid.http.ApiService;
 import kanghb.com.wanandroid.http.BaseResponse;
 import kanghb.com.wanandroid.http.BaseSubscriber;
 import kanghb.com.wanandroid.http.RetrofitHelper;
 import kanghb.com.wanandroid.http.RxUtil;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
-import kanghb.com.wanandroid.model.bean.ProjectBean;
 
 /**
  * 创建时间：2018/10/31
  * 编写人：kanghb
  * 功能描述：
  */
-public class ProjectListPresenter extends RxPresenter<ProjectListContract.View> implements ProjectListContract.Presenter {
+public class HierarchyDetailListPresenter extends RxPresenter<HierarchyDetailListContract.View> implements HierarchyDetailListContract.Presenter {
 
-    private ApiService apiService;
+    private ApiService mApiService;
 
-    public ProjectListPresenter() {
-        apiService = RetrofitHelper.getInstance().getApiService();
+    public HierarchyDetailListPresenter() {
+        mApiService = RetrofitHelper.getInstance().getApiService();
     }
 
+
     @Override
-    public void getRefreshProjectArticleList(int page, int cid) {
-        addSubscribe(apiService.getProjectArticleList(page, cid)
+    public void getRefreshHierarchyArticleList(int page, int cid) {
+        addSubscribe(mApiService.getHierarchyArticleList(page, cid)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {
-
                     @Override
                     public void onNext(ArticleListBean articleListBean) {
-                        mView.showRefreshProjectArticleResult(articleListBean);
+                        mView.showRefreshHierarchyArticleList(articleListBean);
                     }
                 }));
     }
 
     @Override
-    public void getMoreProjectArticleList(int page, int cid) {
-        addSubscribe(apiService.getProjectArticleList(page, cid)
+    public void getMoreHierarchyArticleList(int page, int cid) {
+        addSubscribe(mApiService.getHierarchyArticleList(page, cid)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {
-
                     @Override
                     public void onNext(ArticleListBean articleListBean) {
-                        mView.showMoreProjectArticleResult(articleListBean);
+                        mView.showMoreHierarchyArticleList(articleListBean);
                     }
                 }));
     }

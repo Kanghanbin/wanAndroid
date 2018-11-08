@@ -1,7 +1,7 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="DuplicateDefinition">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -12,16 +12,8 @@
         //沉浸状态栏
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-
+        <!-- 主要是这个起作用,修改默认toolbar返回键的颜色-->
+        <item name="android:colorControlNormal">@android:color/white</item>
 
     </style>
-
-    <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/sp_16</item>
-    </style>
-
-    <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">26sp</item>
-    </style>
-
 </resources>
