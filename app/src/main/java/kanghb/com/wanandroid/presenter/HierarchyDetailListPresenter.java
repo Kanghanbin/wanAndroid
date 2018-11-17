@@ -16,16 +16,14 @@ import kanghb.com.wanandroid.model.bean.ArticleListBean;
  */
 public class HierarchyDetailListPresenter extends RxPresenter<HierarchyDetailListContract.View> implements HierarchyDetailListContract.Presenter {
 
-    private ApiService mApiService;
-
     public HierarchyDetailListPresenter() {
-        mApiService = RetrofitHelper.getInstance().getApiService();
+        apiService = RetrofitHelper.getInstance().getApiService();
     }
 
 
     @Override
     public void getRefreshHierarchyArticleList(int page, int cid) {
-        addSubscribe(mApiService.getHierarchyArticleList(page, cid)
+        addSubscribe(apiService.getHierarchyArticleList(page, cid)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {
@@ -38,7 +36,7 @@ public class HierarchyDetailListPresenter extends RxPresenter<HierarchyDetailLis
 
     @Override
     public void getMoreHierarchyArticleList(int page, int cid) {
-        addSubscribe(mApiService.getHierarchyArticleList(page, cid)
+        addSubscribe(apiService.getHierarchyArticleList(page, cid)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {

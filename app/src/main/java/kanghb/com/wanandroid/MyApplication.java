@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.tencent.smtt.sdk.QbSdk;
 
+import org.litepal.LitePal;
+
 import static com.blankj.utilcode.util.CrashUtils.init;
 
 /**
@@ -23,6 +25,8 @@ public class MyApplication extends Application {
     }
 
     private void initSdk() {
+        // 初始化LitePal数据库
+        LitePal.initialize(instance);
         QbSdk.initX5Environment(instance, new QbSdk.PreInitCallback() {
             @Override
             public void onCoreInitFinished() {

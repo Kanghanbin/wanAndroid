@@ -1,5 +1,7 @@
 package kanghb.com.wanandroid.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -8,23 +10,19 @@ import android.support.v4.text.HtmlCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import butterknife.OnClick;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseMvpActivity;
-import kanghb.com.wanandroid.base.BaseMvpFragment;
 import kanghb.com.wanandroid.contract.ArticleDetailContract;
-import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.presenter.ArticleDetailPresenter;
 import kanghb.com.wanandroid.ui.customView.ProgressWebview;
 import kanghb.com.wanandroid.util.Constant;
@@ -49,7 +47,14 @@ public class ProjectDetailActivity extends BaseMvpActivity<ArticleDetailPresente
     @BindView(R.id.fab_like)
     FloatingActionButton fabLike;
 
-    private ArticleBean articleBean;
+    private Bundle bundle;
+    private int articleId;
+    private String articleLink;
+    private String articleImgLink;
+    private String title;
+    private boolean isCollect, isCollectPage, isCollectSupport;
+
+
 
     @Override
     protected void initPresenter() {
@@ -59,9 +64,19 @@ public class ProjectDetailActivity extends BaseMvpActivity<ArticleDetailPresente
 
     @Override
     protected void initEventAndData() {
-        viewMain.loadUrl(articleBean.getLink());
-        if (!TextUtils.isEmpty(articleBean.getEnvelopePic()) || !articleBean.getEnvelopePic().equals("")) {
-            GlideUtil.loadImage(mContext, articleBean.getEnvelopePic(), detailBarImage);
+        viewMain.loadUrl(articleLink);
+        if (articleLink != null && !TextUtils.isEmpty(articleImgLink) && !articleImgLink.equals("")) {
+            GlideUtil.loadImage(mContext, articleImgLink, detailBarImage);
+        }
+        if (isCollectPage) {
+            fabLike.show();
+        } else {
+            fabLike.hide();
+        }
+        if(isCollect){
+            fabLike.setSelected(true);
+        }else {
+            fabLike.setSelected(false);
         }
     }
 
@@ -73,21 +88,101 @@ public class ProjectDetailActivity extends BaseMvpActivity<ArticleDetailPresente
     @Override
     protected void initToolBar() {
         super.initToolBar();
-        articleBean = (ArticleBean) getIntent().getSerializableExtra(Constant.ARG_PARAM1);
-        if (articleBean != null) {
-            setToolBar(viewToolbar, HtmlCompat.fromHtml(articleBean.getTitle(),HtmlCompat.FROM_HTML_MODE_COMPACT).toString() );
+        getBundleData();
+        setToolBar(viewToolbar, HtmlCompat.fromHtml(title, HtmlCompat.FROM_HTML_MODE_COMPACT).toString());
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        isCollectSupport = getIntent().getExtras().getBoolean(Constant.IS_COLLECT_SUPPORT);
+        if (isCollectSupport) {
+            fabLike.show();
+        } else {
+            fabLike.hide();
+        }
+        getMenuInflater().inflate(R.menu.menu_article_nocollect, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_share:
+//                mPresenter.shareEventPermissionVerify(new RxPermissions(this));
+                break;
+            case R.id.item__browser:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(articleLink)));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 让菜单同时显示图标和文字
+     *
+     * @param featureId Feature id
+     * @param menu      Menu
+     * @return menu if opened
+     */
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null) {
+            if (Constant.MENU_BUILDER.equalsIgnoreCase(menu.getClass().getSimpleName())) {
+                try {
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+
+    private void getBundleData() {
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            title = bundle.getString(Constant.ARTICLE_TITLE);
+            articleLink = bundle.getString(Constant.ARTICLE_LINK);
+            articleImgLink = bundle.getString(Constant.ARTICLE_IMG);
+            articleId = bundle.getInt(Constant.ARTICLE_ID);
+            isCollect = bundle.getBoolean(Constant.IS_COLLECT);
+            isCollectPage = bundle.getBoolean(Constant.IS_COLLECT_PAGE);
+            isCollectSupport = bundle.getBoolean(Constant.IS_COLLECT_SUPPORT);
         }
 
     }
 
     @Override
     public void showAddCollect() {
-
+        fabLike.setSelected(true);
     }
 
     @Override
     public void showCancelCollect() {
-
+        fabLike.setSelected(false);
     }
 
+    @OnClick(R.id.fab_like)
+    public void onViewClicked() {
+        collectEvent();
+    }
+
+
+    private void collectEvent() {
+        if (!mPresenter.getLoginStatus()) {
+            startLoginActivity();
+        } else {
+            if (!fabLike.isSelected()) {
+                mPresenter.addCollect(articleId);
+            } else {
+                mPresenter.cancelCollect(articleId);
+            }
+        }
+    }
 }

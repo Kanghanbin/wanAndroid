@@ -27,6 +27,7 @@ import kanghb.com.wanandroid.presenter.HierarchyDetailListPresenter;
 import kanghb.com.wanandroid.ui.activity.ArticleDetailActivity;
 import kanghb.com.wanandroid.ui.adapter.HierarchyDetailAdapter;
 import kanghb.com.wanandroid.ui.adapter.ProjectListAdapter;
+import kanghb.com.wanandroid.util.IntentUtil;
 
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM1;
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM2;
@@ -124,8 +125,8 @@ public class HierarchyListFragment extends BaseListFragment<HierarchyDetailListP
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,getString(R.string.shareView));
-        Intent intent = new Intent(mContext, ArticleDetailActivity.class);
-        intent.putExtra(ARG_PARAM1,articleBeanList.get(position));
-        startActivity(intent,activityOptionsCompat.toBundle());
+        ArticleBean articleBean = articleBeanList.get(position);
+        IntentUtil.startArticleDetailActivity(mContext,activityOptionsCompat,
+                articleBean.getId(),articleBean.getTitle(),articleBean.getLink(),articleBean.isCollect(),false);
     }
 }

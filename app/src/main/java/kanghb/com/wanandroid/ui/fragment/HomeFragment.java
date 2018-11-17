@@ -35,12 +35,13 @@ import kanghb.com.wanandroid.ui.activity.ArticleDetailActivity;
 import kanghb.com.wanandroid.ui.activity.ProjectDetailActivity;
 import kanghb.com.wanandroid.ui.adapter.ArticleAdapter;
 import kanghb.com.wanandroid.util.GlideImageLoader;
+import kanghb.com.wanandroid.util.IntentUtil;
 
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM1;
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM2;
 
 
-public class HomeFragment extends BaseListFragment<HomePresenter> implements HomeContract.View,BaseQuickAdapter.OnItemClickListener{
+public class HomeFragment extends BaseListFragment<HomePresenter> implements HomeContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
 
     @BindView(R.id.rv_main)
@@ -74,6 +75,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
         banner = llBanner.findViewById(R.id.banner);
         adapter = new ArticleAdapter(R.layout.item_article, articleBeanList);
         adapter.setOnItemClickListener(this);
+        adapter.setOnItemChildClickListener(this);
         rvMain.setLayoutManager(new LinearLayoutManager(mContext));
         //banner 跟随rvmain一起滑动，所以不放在xml里面
         adapter.addHeaderView(llBanner);
@@ -126,7 +128,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
     }
 
     @Override
-    public void showBanner(List<BannerBean> bannerBeanList) {
+    public void showBanner(final List<BannerBean> bannerBeanList) {
         mBannerTitleList = new ArrayList<>();
         List<String> bannerImageList = new ArrayList<>();
         mBannerUrlList = new ArrayList<>();
@@ -155,11 +157,23 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-
+                BannerBean bannerBean = bannerBeanList.get(position);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, banner, getString(R.string.shareView));
+                IntentUtil.startProjectDetailActivity(mContext, activityOptionsCompat, bannerBean.getId(), bannerBean.getTitle(), bannerBean.getUrl(), bannerBean.getImagePath(), false, false, false);
             }
         });
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    @Override
+    public void showAddCollectArticle(int position, ArticleBean articleBean) {
+        adapter.setData(position,articleBean);
+    }
+
+    @Override
+    public void showCancelCollectArticle(int position, ArticleBean articleBean) {
+        adapter.setData(position,articleBean);
     }
 
     private void setRefresh() {
@@ -181,9 +195,31 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,getString(R.string.shareView));
-        Intent intent = new Intent(mContext, ArticleDetailActivity.class);
-        intent.putExtra(ARG_PARAM1,articleBeanList.get(position));
-        startActivity(intent,activityOptionsCompat.toBundle());
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, view, getString(R.string.shareView));
+        ArticleBean articleBean = articleBeanList.get(position);
+        IntentUtil.startArticleDetailActivity(mContext, activityOptionsCompat,
+                articleBean.getId(), articleBean.getTitle(), articleBean.getLink(), articleBean.isCollect(),false);
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (view.getId()) {
+            case R.id.iv_article_collect:
+                if (mPresenter.getLoginStatus()) {
+                    if (adapter.getData().size() <= 0 || position >= adapter.getData().size()) {
+                        return;
+                    }
+                    ArticleBean articleBean = articleBeanList.get(position);
+                    if (articleBean.isCollect()) {
+                        mPresenter.cancelCollectArticle(position, articleBean);
+                    } else {
+                        mPresenter.addCollectArticle(position, articleBean);
+                    }
+
+                } else {
+                    startLoginActivity();
+                }
+                break;
+        }
     }
 }

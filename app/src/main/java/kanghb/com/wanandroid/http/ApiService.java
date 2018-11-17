@@ -5,9 +5,14 @@ import java.util.List;
 import io.reactivex.Flowable;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 import kanghb.com.wanandroid.model.bean.BannerBean;
+import kanghb.com.wanandroid.model.bean.DoneListBean;
+import kanghb.com.wanandroid.model.bean.FriendBean;
 import kanghb.com.wanandroid.model.bean.HierarchyBean;
+import kanghb.com.wanandroid.model.bean.HotKey;
 import kanghb.com.wanandroid.model.bean.NavigationBean;
 import kanghb.com.wanandroid.model.bean.ProjectBean;
+import kanghb.com.wanandroid.model.bean.ToDoBean;
+import kanghb.com.wanandroid.model.bean.TodoListBean;
 import kanghb.com.wanandroid.model.bean.UserBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -51,11 +56,93 @@ public interface ApiService {
     @GET("/project/list/{page}/json")
     Flowable<BaseResponse<ArticleListBean>> getProjectArticleList(@Path("page") int page, @Query("cid") int cid);
 
-    @POST("/lg/collect/{id}/json")
+    @GET("/friend/json")
+    Flowable<BaseResponse<List<FriendBean>>> getFriend();
+
+    @GET("/hotkey/json")
+    Flowable<BaseResponse<List<HotKey>>> getHotKey();
+
+    @POST("/article/query/{page}/json")
     @FormUrlEncoded
+    Flowable<BaseResponse<ArticleListBean>> getSearchArticleList(@Path("page") int page, @Field("k") String k);
+
+
+    //收藏相关
+
+    /**
+     * 收藏站内文章
+     * 参数： 文章id，拼接在链接中。
+     *
+     * @param id
+     * @return
+     */
+    @POST("/lg/collect/{id}/json")
     Flowable<BaseResponse<String>> addCollect(@Path("id") int id);
 
-    @POST("/lg/uncollect_originId/{id}/json")
+    @POST("/lg/collect/add/json")
     @FormUrlEncoded
+    Flowable<BaseResponse<String>> addCollectOutSide(@Field("title") int title, @Field("author") int author, @Field("link") int link);
+
+    /**
+     * 文章列表取消收藏
+     *
+     * @param id
+     * @return
+     */
+    @POST("/lg/uncollect_originId/{id}/json")
     Flowable<BaseResponse<String>> unCollect(@Path("id") int id);
+
+    /**
+     * 我的收藏页面取消收藏
+     *
+     * @param id
+     * @return
+     */
+    @POST("/lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<String>> unCollectFromCollectPage(@Path("id") int id, @Field("originId") int originId);
+
+    @GET("lg/collect/list/{page}/json")
+    Flowable<BaseResponse<ArticleListBean>> getCollectArticleList(@Path("page") int page);
+
+
+    //TODO相关
+
+    /**
+     * @param type todo分为4类，主要为type区分，type取值为0，1，2，3。
+     * @return
+     */
+    @GET("lg/todo/list/{type}/json")
+    Flowable<BaseResponse<TodoListBean>> getToDoList(@Path("type") int type);
+
+    @POST("/lg/todo/add/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<ToDoBean>> addToDo(@Field("title") String title, @Field("content") String content, @Field("date") String date, @Field("type") int type);
+
+    @POST("/lg/todo/update/{id}/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<ToDoBean>> updateToDo(@Path("id") int id, @Field("title") String title, @Field("content") String content,
+                                                @Field("date") String date, @Field("type") int type, @Field("status") int status);
+
+    /**
+     * @param id 拼接在链接上，为唯一标识
+     * @return
+     */
+    @POST("/lg/todo/delete/{id}/json")
+    Flowable<BaseResponse<String>> deleteTodo(@Path("id") int id);
+
+    /**
+     * @param id     拼接在链接上，为唯一标识
+     * @param status 0或1，传1代表未完成到已完成，反之则反之。
+     * @return
+     */
+    @POST("/lg/todo/done/{id}/json")
+    @FormUrlEncoded
+    Flowable<BaseResponse<ToDoBean>> doneToDo(@Path("id") int id, @Field("status") int status);
+
+    @POST("/lg/todo/listnotdo/{type}/json/{page}")
+    Flowable<BaseResponse<DoneListBean>> listNotDoneList(@Path("type") int type, @Path("page") int page);
+
+    @POST("/lg/todo/listdone/{type}/json/{page}")
+    Flowable<BaseResponse<DoneListBean>> listDoneList(@Path("type") int type, @Path("page") int page);
 }

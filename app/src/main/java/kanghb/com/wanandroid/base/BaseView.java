@@ -38,4 +38,12 @@ public interface BaseView {
     void onRetry();
 
 
+    void startLoginActivity();
+
+    void showLoginAccount(String account);
+
+    void showLoginPassword(String pwd);
+
+
+
 }

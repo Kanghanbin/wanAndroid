@@ -23,5 +23,7 @@ public interface ArticleDetailContract {
         void addCollect(int id);
 
         void cancelCollect(int id);
+
+        void cancelCollectFromCollect(int id);
     }
 }

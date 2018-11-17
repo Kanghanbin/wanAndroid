@@ -9,17 +9,13 @@ import kanghb.com.wanandroid.base.BaseView;
  * 功能描述：
  */
 public interface MainContract {
-    interface View extends BaseView{
-        void showSwitchProject();
-
-        void showSwitchHierarchy();
-
-        void showSwitchNavigation();
-
+    interface View extends BaseView {
 
     }
-    interface Presenter extends BasePresenter<View>{
 
-        void setCurrentItem();
+    interface Presenter extends BasePresenter<View> {
+        void setCurrentItem(int pos);
+
+        int getCurrentItem();
     }
 }

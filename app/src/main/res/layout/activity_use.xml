@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.UseActivity">
+
+    <include layout="@layout/view_toolbar"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tabflow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:max_select="1"></com.zhy.view.flowlayout.TagFlowLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

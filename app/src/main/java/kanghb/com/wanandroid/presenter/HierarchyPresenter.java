@@ -19,16 +19,10 @@ import kanghb.com.wanandroid.model.bean.HierarchyBean;
  */
 public class HierarchyPresenter extends RxPresenter<HierarchyContract.View> implements HierarchyContract.Presenter {
 
-    private ApiService mApiService;
-
-    public HierarchyPresenter(){
-        mApiService = RetrofitHelper.getInstance().getApiService();
-    }
-
 
     @Override
     public void getHierarchyTree() {
-        addSubscribe(mApiService.getHierarchyTree()
+        addSubscribe(apiService.getHierarchyTree()
         .compose(RxUtil.<BaseResponse<List<HierarchyBean>>>rxFlowableSchedulerHelper())
         .compose(RxUtil.<List<HierarchyBean>>handleResult())
         .subscribeWith(new BaseSubscriber<List<HierarchyBean>>(mView) {

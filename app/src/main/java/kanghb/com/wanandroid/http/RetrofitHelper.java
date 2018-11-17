@@ -37,7 +37,7 @@ public class RetrofitHelper {
     }
 
     private void initRetrofit() {
-       mRetrofit =  new Retrofit.Builder().baseUrl(Constant.BaseUrl)
+        mRetrofit = new Retrofit.Builder().baseUrl(Constant.BaseUrl)
                 .client(getOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -46,19 +46,21 @@ public class RetrofitHelper {
 
     private OkHttpClient getOkHttpClient() {
         File file = new File(Constant.PATH_CACHE);
-        Cache cache = new Cache(file,1024 * 1024 * 50);
+        Cache cache = new Cache(file, 1024 * 1024 * 50);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(CONNECT_TIME, TimeUnit.SECONDS)
                 .readTimeout(READ_TIME, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIME, TimeUnit.SECONDS)
                 .addInterceptor(new CacheInterceptor())
+                .addInterceptor(new ReadCookiesInterceptor())
+                .addInterceptor(new SaveCookiesInterceptor())
                 .cache(cache);
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
-        return builder.build();
+        return  builder.build();
     }
 
     public static RetrofitHelper getInstance() {
@@ -79,21 +81,21 @@ public class RetrofitHelper {
             int maxAge = 60 * 60;
             int maxStale = 60 * 60 * 24 * 28;
             Request request = chain.request();
-            if(!NetworkUtils.isConnected()){
+            if (!NetworkUtils.isConnected()) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
             }
             Response response = chain.proceed(request);
-            if(NetworkUtils.isConnected()){
+            if (NetworkUtils.isConnected()) {
                 response = response.newBuilder()
                         .removeHeader("Pragma")
-                        .header("Cache-Control","public, max-age=" + maxAge)
+                        .header("Cache-Control", "public, max-age=" + maxAge)
                         .build();
-            }else {
+            } else {
                 response = response.newBuilder()
                         .removeHeader("Pragma")
-                        .header("Cache-Control","public, only-if-cached, max-stale=" + maxStale)
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                         .build();
             }
             return response;
@@ -101,7 +103,7 @@ public class RetrofitHelper {
     }
 
 
-    public ApiService getApiService(){
+    public ApiService getApiService() {
         return mRetrofit.create(ApiService.class);
     }
 

@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'org.litepal.android:java:3.0.0'
     //butterknife
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'

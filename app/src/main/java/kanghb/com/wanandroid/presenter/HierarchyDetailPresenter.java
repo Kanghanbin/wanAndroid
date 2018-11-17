@@ -17,10 +17,5 @@ import kanghb.com.wanandroid.model.bean.ArticleListBean;
  */
 public class HierarchyDetailPresenter extends RxPresenter<HierarchyDetailContract.View> implements HierarchyDetailContract.Presenter {
 
-    private ApiService mApiService;
-
-    public HierarchyDetailPresenter() {
-        mApiService = RetrofitHelper.getInstance().getApiService();
-    }
 
 }

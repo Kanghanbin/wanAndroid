@@ -20,11 +20,6 @@ import kanghb.com.wanandroid.model.bean.ProjectBean;
  */
 public class ProjectPresenter extends RxPresenter<ProjectContract.View> implements ProjectContract.Presenter {
 
-    private ApiService apiService;
-
-    public ProjectPresenter() {
-        apiService = RetrofitHelper.getInstance().getApiService();
-    }
 
     @Override
     public void getProjectList() {

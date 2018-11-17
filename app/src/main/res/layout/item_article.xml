@@ -1,95 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:layout_marginLeft="@dimen/dp_5"
     android:layout_marginRight="@dimen/dp_5"
     android:layout_marginTop="@dimen/dp_5"
+    android:background="@color/white"
     android:elevation="@dimen/dp_8"
-    android:transitionName="@string/shareView"
     android:foreground="?attr/selectableItemBackground"
-    android:background="@color/white">
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:transitionName="@string/shareView">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/iv_article_img"
             android:layout_width="@dimen/dp_36"
             android:layout_height="@dimen/dp_60"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher" />
+
         <TextView
             android:id="@+id/tv_article_author"
-            tools:text="TEST"
-            android:layout_toEndOf="@id/iv_article_img"
-            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/iv_article_img"
             android:textColor="@color/black"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            tools:text="TEST" />
+
         <TextView
             android:id="@+id/tv_article_date"
-            tools:text="TEST"
-            android:layout_toEndOf="@id/iv_article_img"
-            android:layout_alignBottom="@id/iv_article_img"
-            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_article_img"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/iv_article_img"
             android:textColor="@color/gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            tools:text="TEST" />
+
+        <ImageView
+            android:id="@+id/iv_article_collect"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignBottom="@id/tv_article_date"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_toEndOf="@id/tv_article_date"
+            android:src="@mipmap/icon_collect_no" />
+
         <TextView
             android:id="@+id/tv_article_superChapter"
-            android:layout_alignParentEnd="true"
-            tools:text="12"
-            android:gravity="center_vertical"
-            android:textSize="12sp"
-            android:textColor="@color/orange"
-            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/orange"
+            android:textSize="12sp"
+            tools:text="12" />
+
         <TextView
             android:id="@+id/tv_article_chapter"
-            android:layout_toStartOf="@id/tv_article_superChapter"
-            android:layout_marginEnd="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            tools:text="Python"
-            android:textSize="12sp"
-            android:textColor="@color/blue_700"
-            android:background="@color/lightyellow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/tv_article_superChapter"
+            android:background="@color/lightyellow"
+            android:paddingBottom="2dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="2dp"
+            android:textColor="@color/blue_700"
+            android:textSize="12sp"
+            tools:text="Python" />
 
         <TextView
             android:id="@+id/tv_article_fresh"
-            android:background="@drawable/shape_tag_new_text"
-            android:layout_below="@id/tv_article_chapter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="最新"
-            android:textSize="@dimen/sp_10"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tv_article_chapter"
+            android:background="@drawable/shape_tag_new_text"
+            android:paddingBottom="@dimen/dp_2"
             android:paddingLeft="@dimen/dp_4"
             android:paddingRight="@dimen/dp_4"
-            android:paddingBottom="@dimen/dp_2"
             android:paddingTop="@dimen/dp_2"
+            android:text="最新"
             android:textColor="@color/crimson"
-            android:layout_alignParentEnd="true" />
+            android:textSize="@dimen/sp_10" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_article_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="TEST"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="TEST" />
 
 </LinearLayout>

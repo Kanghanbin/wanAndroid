@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_5"
+    android:layout_marginRight="@dimen/dp_5"
+    android:layout_marginTop="@dimen/dp_5"
+    android:background="@color/white"
+    android:elevation="@dimen/dp_8"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:transitionName="@string/shareView">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_todo_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/dp_100"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            tools:text="TEST" />
+
+        <TextView
+            android:id="@+id/tv_todo_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_todo_title"
+            android:drawableLeft="@mipmap/icon_clear"
+            android:drawablePadding="@dimen/dp_5"
+            android:src="@mipmap/icon_clear"
+            android:text="删除"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_todo_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_todo_del"
+            android:layout_toRightOf="@id/tv_todo_del"
+            android:drawableLeft="@mipmap/icon_transfer"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_5"
+            android:src="@mipmap/icon_clear"
+            android:text="完成"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_completedate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_todo_title"
+            android:layout_marginStart="8dp"
+            android:layout_toRightOf="@id/tv_todo_title"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            tools:text="TEST" />
+
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="2dp"
+            android:textColor="@color/orange"
+            android:textSize="12sp"
+            tools:text="2018-8-46" />
+
+        <TextView
+            android:id="@+id/tv_todo_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tv_date"
+            android:background="@drawable/shape_tag_new_text"
+            android:paddingBottom="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_4"
+            android:paddingRight="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_2"
+            android:text="学习"
+            android:textColor="@color/crimson"
+            android:textSize="@dimen/sp_10" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_todo_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:text="TEST" />
+
+</LinearLayout>

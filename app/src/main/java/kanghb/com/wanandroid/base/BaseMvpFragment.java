@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SnackbarUtils;
 
+import kanghb.com.wanandroid.util.IntentUtil;
+
 
 /**
  * 创建时间：2018/10/31
@@ -21,7 +23,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initPresenter();
-        if(mPresenter != null){
+        if (mPresenter != null) {
             mPresenter.attachView(this);
         }
 
@@ -29,7 +31,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
 
     @Override
     public void onDestroyView() {
-        if(mPresenter != null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
         super.onDestroyView();
@@ -64,5 +66,21 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
     public void onRetry() {
 
     }
+
+    @Override
+    public void startLoginActivity() {
+        IntentUtil.startLoginActivity(mActivity);
+    }
+
     protected abstract void initPresenter();
+
+    @Override
+    public void showLoginAccount(String account) {
+
+    }
+
+    @Override
+    public void showLoginPassword(String pwd) {
+
+    }
 }

@@ -147,6 +147,8 @@
     <dimen name="sp_28">28sp</dimen>
     <dimen name="sp_36">36sp</dimen>
     <dimen name="sp_48">48sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

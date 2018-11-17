@@ -40,8 +40,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
+        app:itemBackground="@drawable/seletor_item_nav"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/view_drawer_header"
+        android:scrollbars="none"
         app:menu="@menu/menu_drawer"></android.support.design.widget.NavigationView>
 
 

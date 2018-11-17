@@ -51,6 +51,7 @@ public class NavigationAdapter extends BaseQuickAdapter<NavigationBean, BaseView
             TextView textView = new TextView(mContext);
             textView.setText(item.getArticles().get(i).getTitle());
             textView.setTextSize(16);
+            textView.setBackgroundResource(R.drawable.seletor_item_nav);
             textView.setTextColor(ContextCompat.getColor(mContext, R.color.gray));
             layoutParams.setMargins(0, SizeUtils.dp2px(10), 0, 0);
             textView.setLayoutParams(layoutParams);

@@ -1,5 +1,7 @@
 package kanghb.com.wanandroid.http;
 
+import com.blankj.utilcode.util.NetworkUtils;
+
 import org.reactivestreams.Publisher;
 
 import io.reactivex.BackpressureStrategy;
@@ -10,6 +12,9 @@ import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import kanghb.com.wanandroid.MyApplication;
+import kanghb.com.wanandroid.R;
+import kanghb.com.wanandroid.util.Constant;
 
 
 /**
@@ -20,10 +25,11 @@ import io.reactivex.schedulers.Schedulers;
 public class RxUtil {
     /**
      * 统一线程处理
+     *
      * @param <T>
      * @return
      */
-    public static <T>FlowableTransformer<T,T> rxFlowableSchedulerHelper(){
+    public static <T> FlowableTransformer<T, T> rxFlowableSchedulerHelper() {
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> upstream) {
@@ -35,20 +41,45 @@ public class RxUtil {
 
     /**
      * 返回结果统一处理
+     *
      * @param <T>
      * @return
      */
-    public static <T>FlowableTransformer<BaseResponse<T>,T> handleResult(){
+    public static <T> FlowableTransformer<BaseResponse<T>, T> handleResult() {
         return new FlowableTransformer<BaseResponse<T>, T>() {
             @Override
             public Publisher<T> apply(Flowable<BaseResponse<T>> upstream) {
                 return upstream.flatMap(new Function<BaseResponse<T>, Flowable<T>>() {
                     @Override
                     public Flowable<T> apply(BaseResponse<T> tBaseResponse) throws Exception {
-                        if(tBaseResponse.getErrorCode() == 0 && tBaseResponse.getData() != null){
+                        if (tBaseResponse.getErrorCode() == Constant.SUCCESS && tBaseResponse.getData() != null) {
                             return createData(tBaseResponse.getData());
-                        }else {
-                            return Flowable.error(new ApiException(tBaseResponse.getErrorMsg(),tBaseResponse.getErrorCode()));
+                        } else {
+                            return Flowable.error(new ApiException(tBaseResponse.getErrorMsg(), tBaseResponse.getErrorCode()));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
+     * collect返回结果为null做特殊处理
+     * {"data":null,"errorCode":0,"errorMsg":""}
+     * @param <T>
+     * @return
+     */
+    public static <T> FlowableTransformer<BaseResponse<T>, T> handleCollectResult(final String s) {
+        return new FlowableTransformer<BaseResponse<T>, T>() {
+            @Override
+            public Publisher<T> apply(Flowable<BaseResponse<T>> upstream) {
+                return upstream.flatMap(new Function<BaseResponse<T>, Flowable<T>>() {
+                    @Override
+                    public Flowable<T> apply(BaseResponse<T> tBaseResponse) throws Exception {
+                        if (tBaseResponse.getErrorCode() == Constant.SUCCESS && NetworkUtils.isConnected()) {
+                            return (Flowable<T>) createData(new String(s));
+                        } else {
+                            return Flowable.error(new ApiException(tBaseResponse.getErrorMsg(), tBaseResponse.getErrorCode()));
                         }
                     }
                 });
@@ -58,6 +89,7 @@ public class RxUtil {
 
     /**
      * 生成Flowabele
+     *
      * @param data
      * @param <T>
      * @return
@@ -66,10 +98,10 @@ public class RxUtil {
         return Flowable.create(new FlowableOnSubscribe<T>() {
             @Override
             public void subscribe(FlowableEmitter<T> emitter) throws Exception {
-                try{
+                try {
                     emitter.onNext(data);
                     emitter.onComplete();
-                }catch (Exception e){
+                } catch (Exception e) {
                     emitter.onError(e);
                 }
 

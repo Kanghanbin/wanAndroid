@@ -12,6 +12,7 @@ import kanghb.com.wanandroid.http.BaseResponse;
 import kanghb.com.wanandroid.http.BaseSubscriber;
 import kanghb.com.wanandroid.http.RetrofitHelper;
 import kanghb.com.wanandroid.http.RxUtil;
+import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 import kanghb.com.wanandroid.model.bean.BannerBean;
 import kanghb.com.wanandroid.ui.fragment.HomeFragment;
@@ -22,12 +23,8 @@ import kanghb.com.wanandroid.ui.fragment.HomeFragment;
  * 功能描述：
  */
 public class HomePresenter extends RxPresenter<HomeContract.View> implements HomeContract.Presenter {
-    private ApiService apiService;
-    private int current;
 
-    public HomePresenter() {
-        apiService = RetrofitHelper.getInstance().getApiService();
-    }
+    private int current;
 
     @Override
     public void getBanner() {
@@ -81,6 +78,37 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
     public void loadMore() {
         current++;
         getArticleMore();
+    }
+
+    @Override
+    public void addCollectArticle(final int position, final ArticleBean articleBean) {
+        addSubscribe(apiService.addCollect(articleBean.getId())
+                .compose(RxUtil.<BaseResponse<String>>rxFlowableSchedulerHelper())
+                .compose(RxUtil.<String>handleCollectResult(MyApplication.getInstance().getString(R.string.collect_success)))
+                .subscribeWith(new BaseSubscriber<String>(mView) {
+                    @Override
+                    public void onNext(String s) {
+                        articleBean.setCollect(true);
+                        mView.showAddCollectArticle(position,articleBean);
+                        mView.showToast(s);
+                    }
+                }));
+    }
+
+    @Override
+    public void cancelCollectArticle(final int position, final ArticleBean articleBean) {
+        addSubscribe(apiService.unCollect(articleBean.getId())
+                .compose(RxUtil.<BaseResponse<String>>rxFlowableSchedulerHelper())
+                .compose(RxUtil.<String>handleCollectResult(MyApplication.getInstance().getString(R.string.uncollect_success)))
+                .subscribeWith(new BaseSubscriber<String>(mView) {
+                    @Override
+                    public void onNext(String s) {
+                        articleBean.setCollect(false);
+                        mView.showCancelCollectArticle(position,articleBean);
+                        mView.showToast(s);
+                    }
+                }));
+
     }
 
 

@@ -58,8 +58,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void gotoMain() {
+
         ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(btnLogin,btnLogin.getWidth()/2,btnLogin.getHeight()/2,0,0);
         ActivityCompat.startActivity(mContext,new Intent(this, MainActivity.class),compat.toBundle());
+        onBackPressedSupport();
     }
 
     @Override

@@ -2,6 +2,10 @@ package kanghb.com.wanandroid.base;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import kanghb.com.wanandroid.db.SharePreferencesHelper;
+import kanghb.com.wanandroid.http.ApiService;
+import kanghb.com.wanandroid.http.RetrofitHelper;
+import kanghb.com.wanandroid.util.Constant;
 
 /**
  * 创建时间：2018/10/24
@@ -14,6 +18,13 @@ import io.reactivex.disposables.Disposable;
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     protected T mView;
     private CompositeDisposable mCompositeDisposable;
+    protected SharePreferencesHelper sharePreferencesHelper;
+    protected ApiService apiService;
+
+    public RxPresenter() {
+        apiService = RetrofitHelper.getInstance().getApiService();
+        sharePreferencesHelper = SharePreferencesHelper.getInstance();
+    }
 
     protected void addSubscribe(Disposable disposable){
         if(mCompositeDisposable == null){
@@ -38,4 +49,42 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         this.mView = null;
         unSubscribe();
     }
+
+
+
+    @Override
+    public void getLoginAccount() {
+        mView.showLoginAccount(sharePreferencesHelper.getLoginAccount());
+    }
+
+    @Override
+    public void getLoignPassword() {
+        mView.showLoginPassword(sharePreferencesHelper.getLoginPassword());
+    }
+
+    @Override
+    public boolean getLoginStatus() {
+        return sharePreferencesHelper.getLoginStatus();
+    }
+
+    @Override
+    public void setLoginAccount(String account) {
+        sharePreferencesHelper.setLoginAccount(account);
+    }
+
+    @Override
+    public void setLoginPassword(String password) {
+        sharePreferencesHelper.setLoginPassword(password);
+    }
+
+    @Override
+    public void setLoginStatus(boolean b) {
+        sharePreferencesHelper.setLoginStatus(b);
+    }
+
+
+
+
+
+
 }

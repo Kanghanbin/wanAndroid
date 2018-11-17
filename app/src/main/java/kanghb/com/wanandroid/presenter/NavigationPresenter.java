@@ -19,11 +19,6 @@ import kanghb.com.wanandroid.model.bean.NavigationBean;
  */
 public class NavigationPresenter extends RxPresenter<NavigationContract.View> implements NavigationContract.Presenter {
 
-    private ApiService apiService;
-
-    public NavigationPresenter() {
-        apiService = RetrofitHelper.getInstance().getApiService();
-    }
 
     @Override
     public void getNavigation() {

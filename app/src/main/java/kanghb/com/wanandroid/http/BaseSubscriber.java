@@ -1,12 +1,14 @@
 package kanghb.com.wanandroid.http;
 
 import android.print.PrinterId;
+import android.support.v7.view.menu.MenuView;
 import android.text.TextUtils;
 
 import io.reactivex.subscribers.ResourceSubscriber;
 import kanghb.com.wanandroid.MyApplication;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseView;
+import kanghb.com.wanandroid.util.Constant;
 import retrofit2.HttpException;
 
 /**
@@ -52,7 +54,10 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
         if(mErrorMsg != null && !TextUtils.isEmpty(mErrorMsg)){
             mView.showToast(mErrorMsg);
         }else if(t instanceof ApiException){
-            mView.showToast(t.toString());
+            if(((ApiException) t).getCode() == Constant.UN_LOGIN || t.getMessage().equals(Constant.UN_LOGIN_MESSAGE)){
+                mView.startLoginActivity();
+            }
+            mView.showToast(t.getMessage().toString());
         }else if(t instanceof HttpException){
             mView.showToast(MyApplication.getInstance().getString(R.string.data_fail));
         }else {

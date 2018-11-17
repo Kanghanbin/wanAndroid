@@ -1,0 +1,53 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/search_back_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/icon_back" />
+
+    <TextView
+        android:id="@+id/search_tv"
+        android:layout_width="@dimen/dp_54"
+        android:layout_height="@dimen/dp_28"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:text="@string/action_search"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:inputType="text"
+            android:labelFor="@id/search_edit"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/shape_cursor"
+            android:textSize="@dimen/sp_14"
+            android:paddingStart="@dimen/dp_27"
+            android:paddingEnd="@dimen/dp_1"
+            android:drawableStart="@mipmap/icon_search"
+            android:layout_marginStart="@dimen/dp_6"
+            android:hint="@string/search_tint"
+            android:textColorHint="@color/lightgray"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

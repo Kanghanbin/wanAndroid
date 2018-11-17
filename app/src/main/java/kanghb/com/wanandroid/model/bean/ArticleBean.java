@@ -60,6 +60,19 @@ public class ArticleBean implements Serializable {
     private int zan;
     private List<TagsBean> tags;
 
+    /**
+     * originId:列表页下发，无则为-1
+     */
+    private int originId = -1;
+
+    public int getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(int originId) {
+        this.originId = originId;
+    }
+
     public String getApkLink() {
         return apkLink;
     }

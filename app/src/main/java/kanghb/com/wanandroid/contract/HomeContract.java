@@ -6,6 +6,7 @@ import java.util.List;
 
 import kanghb.com.wanandroid.base.BasePresenter;
 import kanghb.com.wanandroid.base.BaseView;
+import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 import kanghb.com.wanandroid.model.bean.BannerBean;
 
@@ -22,6 +23,10 @@ public interface HomeContract {
 
         void showBanner(List<BannerBean> bannerBeanList);
 
+        void showAddCollectArticle(int position, ArticleBean articleBean);
+
+        void showCancelCollectArticle(int position, ArticleBean articleBean);
+
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -35,6 +40,10 @@ public interface HomeContract {
         void autoRefresh();
 
         void loadMore();
+
+        void addCollectArticle(int position, ArticleBean articleBean);
+
+        void cancelCollectArticle(int position, ArticleBean articleBean);
 
     }
 }

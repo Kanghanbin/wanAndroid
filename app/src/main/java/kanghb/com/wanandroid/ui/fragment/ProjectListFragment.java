@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.IntentUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -35,6 +36,7 @@ import kanghb.com.wanandroid.presenter.ProjectListPresenter;
 import kanghb.com.wanandroid.ui.activity.ArticleDetailActivity;
 import kanghb.com.wanandroid.ui.activity.ProjectDetailActivity;
 import kanghb.com.wanandroid.ui.adapter.ProjectListAdapter;
+import kanghb.com.wanandroid.util.IntentUtil;
 
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM1;
 import static kanghb.com.wanandroid.util.Constant.ARG_PARAM2;
@@ -131,9 +133,9 @@ public class ProjectListFragment extends BaseListFragment<ProjectListPresenter> 
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ArticleBean articleBean = articleBeanList.get(position);
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,view,getString(R.string.shareView));
-        Intent intent = new Intent(mContext, ProjectDetailActivity.class);
-        intent.putExtra(ARG_PARAM1,articleBeanList.get(position));
-        startActivity(intent,activityOptionsCompat.toBundle());
+        IntentUtil.startProjectDetailActivity(mContext,activityOptionsCompat,articleBean.getId(),articleBean.getTitle(),articleBean.getLink(),articleBean.getEnvelopePic(),articleBean.isCollect(),false,true);
+
     }
 }

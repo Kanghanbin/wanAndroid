@@ -20,7 +20,7 @@ import kanghb.com.wanandroid.R;
 /**
  * 创建时间：2018/11/8
  * 编写人：kanghb
- * 功能描述：
+ * 功能描述：一个自带进度条的x5内核webview
  */
 public class ProgressWebview extends WebView {
     private ProgressBar progressbar;  //进度条

@@ -4,6 +4,7 @@ package kanghb.com.wanandroid.ui.adapter;
 import android.support.annotation.Nullable;
 
 import android.support.v4.text.HtmlCompat;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -23,9 +24,14 @@ import kanghb.com.wanandroid.util.GlideUtil;
  * 功能描述：
  */
 public class ArticleAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
+    private boolean isCollectPage = false;
 
     public ArticleAdapter(int layoutResId, @Nullable List<ArticleBean> data) {
         super(layoutResId, data);
+    }
+
+    public void setCollectPage(boolean isCollectPage) {
+        this.isCollectPage = isCollectPage;
     }
 
     @Override
@@ -33,10 +39,15 @@ public class ArticleAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder
         helper.setText(R.id.tv_article_title, HtmlCompat.fromHtml(item.getTitle(), HtmlCompat.FROM_HTML_MODE_LEGACY))
                 .setText(R.id.tv_article_author, item.getAuthor())
                 .setText(R.id.tv_article_date, item.getNiceDate())
-                .setText(R.id.tv_article_superChapter, HtmlCompat.fromHtml(item.getSuperChapterName(), HtmlCompat.FROM_HTML_MODE_LEGACY))
                 .setText(R.id.tv_article_chapter, HtmlCompat.fromHtml(item.getChapterName(), HtmlCompat.FROM_HTML_MODE_LEGACY))
-                .setVisible(R.id.tv_article_fresh, item.isFresh() ? true : false);
+                .setVisible(R.id.tv_article_fresh, item.isFresh() ? true : false)
+                .setImageResource(R.id.iv_article_collect, item.isCollect() || isCollectPage ? R.mipmap.icon_collect_yes : R.mipmap.icon_collect_no);
         GlideUtil.loadImage(mContext, item.getEnvelopePic(), (ImageView) helper.getView(R.id.iv_article_img));
+        if (item.getSuperChapterName() != null && !item.getSuperChapterName().equals("") && !TextUtils.isEmpty(item.getSuperChapterName())) {
+            helper.setText(R.id.tv_article_superChapter, HtmlCompat.fromHtml(item.getSuperChapterName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        }
+        helper.addOnClickListener(R.id.iv_article_collect);
+
 
     }
 }

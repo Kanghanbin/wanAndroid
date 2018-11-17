@@ -2,21 +2,19 @@ package kanghb.com.wanandroid.presenter;
 
 import android.text.TextUtils;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import io.reactivex.functions.Consumer;
 import kanghb.com.wanandroid.MyApplication;
 import kanghb.com.wanandroid.R;
+import kanghb.com.wanandroid.base.RxBus;
 import kanghb.com.wanandroid.base.RxPresenter;
 import kanghb.com.wanandroid.contract.LoginContract;
+import kanghb.com.wanandroid.eventtype.EventLogin;
 import kanghb.com.wanandroid.http.ApiService;
 import kanghb.com.wanandroid.http.BaseResponse;
 import kanghb.com.wanandroid.http.BaseSubscriber;
 import kanghb.com.wanandroid.http.RetrofitHelper;
 import kanghb.com.wanandroid.http.RxUtil;
 import kanghb.com.wanandroid.model.bean.UserBean;
-import retrofit2.Retrofit;
+import kanghb.com.wanandroid.db.SharePreferencesHelper;
 
 /**
  * 创建时间：2018/10/26
@@ -25,14 +23,12 @@ import retrofit2.Retrofit;
  */
 public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter {
 
-    private ApiService apiService;
-
     public LoginPresenter() {
         apiService = RetrofitHelper.getInstance().getApiService();
     }
 
     @Override
-    public void login(String username, String password) {
+    public void login(final String username, final String password) {
         if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
             mView.showToast("用户名或密码不能为空");
             return;
@@ -45,6 +41,10 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
                     public void onNext(UserBean userBean) {
                         mView.showToast("登录成功");
                         mView.gotoMain();
+                        sharePreferencesHelper.setLoginAccount(username);
+                        sharePreferencesHelper.setLoginPassword(password);
+                        sharePreferencesHelper.setLoginStatus(true);
+                        RxBus.getDefault().post(new EventLogin(true));
                     }
                 }));
     }
