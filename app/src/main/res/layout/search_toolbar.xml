@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_12"
             android:inputType="text"
+            android:imeOptions="actionSearch"
             android:labelFor="@id/search_edit"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/shape_cursor"

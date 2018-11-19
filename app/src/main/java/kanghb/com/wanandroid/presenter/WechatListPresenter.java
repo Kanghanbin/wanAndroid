@@ -3,51 +3,42 @@ package kanghb.com.wanandroid.presenter;
 import kanghb.com.wanandroid.MyApplication;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.RxPresenter;
-import kanghb.com.wanandroid.contract.SearchListContract;
-import kanghb.com.wanandroid.http.ApiService;
+import kanghb.com.wanandroid.contract.WechatContract;
+import kanghb.com.wanandroid.contract.WechatListContract;
 import kanghb.com.wanandroid.http.BaseResponse;
 import kanghb.com.wanandroid.http.BaseSubscriber;
-import kanghb.com.wanandroid.http.RetrofitHelper;
 import kanghb.com.wanandroid.http.RxUtil;
 import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 
 /**
- * 创建时间：2018/11/13
+ * 创建时间：2018/11/19
  * 编写人：kanghb
  * 功能描述：
  */
-public class SearchListPresenter extends RxPresenter<SearchListContract.View> implements SearchListContract.Presenter {
-    private int currentPage = 0;
-
+public class WechatListPresenter extends RxPresenter<WechatListContract.View> implements WechatListContract.Presenter {
     @Override
-    public void getSearchListArticles(String key) {
-        currentPage = 0;
-        addSubscribe(apiService.getSearchArticleList(currentPage, key)
+    public void getRefreshWechatArticleList(int id, int page) {
+        addSubscribe(apiService.getHistoryWxarticleList(id, page)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {
                     @Override
                     public void onNext(ArticleListBean articleListBean) {
-                        mView.showSearchListArticles(articleListBean);
+                        mView.showRefreshWechatArticleList(articleListBean);
                     }
                 }));
     }
 
     @Override
-    public void getMoreSearchListArticles(String key) {
-        currentPage++;
-        addSubscribe(apiService.getSearchArticleList(currentPage, key)
+    public void getMoreWechatArticleList(int id, int page) {
+        addSubscribe(apiService.getHistoryWxarticleList(id, page)
                 .compose(RxUtil.<BaseResponse<ArticleListBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<ArticleListBean>handleResult())
                 .subscribeWith(new BaseSubscriber<ArticleListBean>(mView) {
                     @Override
                     public void onNext(ArticleListBean articleListBean) {
-                        if (articleListBean == null || articleListBean.getDatas() == null || articleListBean.getDatas().size() == 0) {
-                            currentPage--;
-                        }
-                        mView.showMoreSearchListArticles(articleListBean);
-
+                        mView.showMoreWechatArticleList(articleListBean);
                     }
                 }));
     }
@@ -80,6 +71,5 @@ public class SearchListPresenter extends RxPresenter<SearchListContract.View> im
                         mView.showToast(s);
                     }
                 }));
-
     }
 }

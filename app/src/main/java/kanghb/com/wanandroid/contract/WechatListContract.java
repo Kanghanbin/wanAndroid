@@ -6,26 +6,27 @@ import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 
 /**
- * 创建时间：2018/11/13
+ * 创建时间：2018/10/31
  * 编写人：kanghb
  * 功能描述：
  */
-public interface SearchListContract {
+public interface WechatListContract {
     interface View extends BaseView {
-        void showSearchListArticles(ArticleListBean articleListBean);
+        void showRefreshWechatArticleList(ArticleListBean articleListBean);
 
-        void showMoreSearchListArticles(ArticleListBean articleListBean);
+        void showMoreWechatArticleList(ArticleListBean articleListBean);
+
 
         void showAddCollectArticle(int position, ArticleBean articleBean);
 
         void showCancelCollectArticle(int position, ArticleBean articleBean);
-
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getSearchListArticles(String key);
 
-        void getMoreSearchListArticles(String key);
+        void getRefreshWechatArticleList(int id, int page);
+
+        void getMoreWechatArticleList(int id, int page);
 
         void addCollectArticle(int position, ArticleBean articleBean);
 

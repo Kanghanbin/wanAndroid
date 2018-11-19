@@ -3,30 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/register_bg_img"
+    android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-
-    <RelativeLayout
-        android:id="@+id/rl_pic_anim"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
-        android:layout_marginTop="@dimen/dp_100">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/logo" />
-    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/sv_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_pic_anim"
         android:visibility="visible">
 
 
@@ -36,6 +21,22 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_pic_anim"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="80dp"
+                android:layout_marginTop="@dimen/dp_100">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,6 +144,22 @@
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="80dp"
+                android:layout_marginTop="@dimen/dp_100">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo" />
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

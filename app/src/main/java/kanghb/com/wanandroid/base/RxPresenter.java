@@ -82,9 +82,10 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         sharePreferencesHelper.setLoginStatus(b);
     }
 
-
-
-
+    @Override
+    public void clearCookie() {
+        sharePreferencesHelper.removeCookie();
+    }
 
 
 }

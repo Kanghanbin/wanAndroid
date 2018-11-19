@@ -81,6 +81,8 @@ public class Constant {
 
     public static final String TODOBEAN = "todobean";
 
+    public static final String WXARTICLEBEAN = "wxarticlebean";
+
     /**
      * Tab colors
      */

@@ -7,6 +7,7 @@ import android.support.v4.text.HtmlCompat;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -43,7 +44,7 @@ public class ArticleAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder
                 .setVisible(R.id.tv_article_fresh, item.isFresh() ? true : false)
                 .setImageResource(R.id.iv_article_collect, item.isCollect() || isCollectPage ? R.mipmap.icon_collect_yes : R.mipmap.icon_collect_no);
         GlideUtil.loadImage(mContext, item.getEnvelopePic(), (ImageView) helper.getView(R.id.iv_article_img));
-        if (item.getSuperChapterName() != null && !item.getSuperChapterName().equals("") && !TextUtils.isEmpty(item.getSuperChapterName())) {
+        if (item.getSuperChapterName() != null && !item.getSuperChapterName().equals("") && !StringUtils.isEmpty(item.getSuperChapterName())) {
             helper.setText(R.id.tv_article_superChapter, HtmlCompat.fromHtml(item.getSuperChapterName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
         }
         helper.addOnClickListener(R.id.iv_article_collect);

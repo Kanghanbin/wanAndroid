@@ -2,6 +2,8 @@ package kanghb.com.wanandroid.db;
 
 import com.blankj.utilcode.util.SPUtils;
 
+import org.litepal.util.Const;
+
 import java.util.HashSet;
 
 import kanghb.com.wanandroid.R;
@@ -80,6 +82,11 @@ public class SharePreferencesHelper implements ISharePreference {
     @Override
     public int getCurrentItem() {
         return spUtils.getInt(Constant.CURRENT_ITEM);
+    }
+
+    @Override
+    public void removeCookie() {
+        spUtils.remove(Constant.COOKIES);
     }
 
 

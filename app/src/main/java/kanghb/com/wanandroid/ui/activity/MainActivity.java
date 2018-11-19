@@ -1,5 +1,6 @@
 package kanghb.com.wanandroid.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseMvpActivity;
 import kanghb.com.wanandroid.contract.MainContract;
 import kanghb.com.wanandroid.presenter.MainPresenter;
+import kanghb.com.wanandroid.ui.fragment.AboutFragment;
 import kanghb.com.wanandroid.ui.fragment.CollectFragment;
 import kanghb.com.wanandroid.ui.fragment.HierarchyFragment;
 import kanghb.com.wanandroid.ui.fragment.HomeFragment;
@@ -49,6 +52,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     private ProjectFragment projectFragment;
     private NavigationFragment navigationFragment;
     private CollectFragment collectFragment;
+    private AboutFragment aboutFragment;
 
     private int currentFragmentType = Constant.TYPE_HOME;
     private int hideFragmentType = Constant.TYPE_HOME;
@@ -86,7 +90,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         projectFragment = ProjectFragment.newInstance(null, null);
         navigationFragment = NavigationFragment.newInstance(null, null);
         collectFragment = CollectFragment.newInstance(null, null);
-        loadMultipleRootFragment(R.id.fl_contain, 0, homeFragment, hierarchyFragment, navigationFragment, projectFragment, collectFragment);
+        aboutFragment = AboutFragment.newInstance(null, null);
+        loadMultipleRootFragment(R.id.fl_contain, 0, homeFragment, hierarchyFragment, navigationFragment, projectFragment, collectFragment, aboutFragment);
         bottonNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -204,6 +209,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 return navigationFragment;
             case Constant.TYPE_COLLECT:
                 return collectFragment;
+            case Constant.TYPE_ABOUT:
+                return aboutFragment;
         }
         return homeFragment;
     }
@@ -249,11 +256,16 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 currentMenuItem = menuItemHome;
                 break;
             case R.id.item_wechat:
-                mPresenter.setCurrentItem(hideFragmentType);
+                if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
+                    mPresenter.setCurrentItem(hideFragmentType);
+                }
+                IntentUtil.startWechatActivity(mContext);
                 currentMenuItem = menuItemWechat;
                 break;
             case R.id.item_Todo:
-                mPresenter.setCurrentItem(hideFragmentType);
+                if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
+                    mPresenter.setCurrentItem(hideFragmentType);
+                }
                 if (mPresenter.getLoginStatus()) {
                     IntentUtil.startTodoActivity(mContext);
                 } else {
@@ -263,7 +275,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 break;
             case R.id.item_collect:
                 //切换前保存bottomnavigation，确保下次切回来还是那一项
-                mPresenter.setCurrentItem(hideFragmentType);
+                if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
+                    mPresenter.setCurrentItem(hideFragmentType);
+                }
                 if (mPresenter.getLoginStatus()) {
                     setToolBarTitle(Constant.TYPE_COLLECT);
                     switchFragment();
@@ -273,12 +287,21 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 currentMenuItem = menuItemCollect;
                 break;
             case R.id.item_setting:
-                mPresenter.setCurrentItem(hideFragmentType);
+                if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
+                    mPresenter.setCurrentItem(hideFragmentType);
+                }
+
                 break;
             case R.id.item_about:
-                mPresenter.setCurrentItem(hideFragmentType);
+                if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
+                    mPresenter.setCurrentItem(hideFragmentType);
+                }
+                setToolBarTitle(Constant.TYPE_ABOUT);
+                switchFragment();
+                currentMenuItem = menuItemAbout;
                 break;
             case R.id.item_logout:
+                showLogoutDialog();
                 break;
 
         }
@@ -289,6 +312,25 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         currentMenuItem.setChecked(true);
         lastMenuItem = currentMenuItem;
         return true;
+    }
+
+    private void showLogoutDialog() {
+        final AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+        alertDialog.setMessage("确定退出当前账号吗？");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.logout();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
@@ -317,4 +359,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     }
 
 
+    @Override
+    public void showLogout() {
+        menuItemLogout.setVisible(false);
+        showToast(getString(R.string.logout_success));
+        startLoginActivity();
+    }
 }

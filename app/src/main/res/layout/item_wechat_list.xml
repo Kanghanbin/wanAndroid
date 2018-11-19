@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_6"
+    android:layout_marginRight="@dimen/dp_6"
+    android:layout_marginTop="@dimen/dp_6"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:padding="@dimen/dp_10"
+    android:transitionName="@string/shareView">
+
+    <ImageView
+        android:id="@+id/iv_wechat_collect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/icon_collect_no" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp_16" />
+
+    </RelativeLayout>
+
+</LinearLayout>

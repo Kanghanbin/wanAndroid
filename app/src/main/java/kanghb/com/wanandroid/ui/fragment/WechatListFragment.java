@@ -1,11 +1,10 @@
-package kanghb.com.wanandroid.ui.activity;
+package kanghb.com.wanandroid.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,116 +17,134 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import kanghb.com.wanandroid.R;
-import kanghb.com.wanandroid.base.BaseListActivity;
-import kanghb.com.wanandroid.contract.SearchListContract;
+import kanghb.com.wanandroid.base.BaseListFragment;
+import kanghb.com.wanandroid.contract.HierarchyDetailListContract;
+import kanghb.com.wanandroid.contract.WechatListContract;
 import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
-import kanghb.com.wanandroid.presenter.SearchListPresenter;
-import kanghb.com.wanandroid.ui.adapter.ArticleAdapter;
-import kanghb.com.wanandroid.util.Constant;
+import kanghb.com.wanandroid.presenter.HierarchyDetailListPresenter;
+import kanghb.com.wanandroid.presenter.WechatListPresenter;
+import kanghb.com.wanandroid.ui.adapter.HierarchyDetailAdapter;
+import kanghb.com.wanandroid.ui.adapter.WechatListAdapter;
 import kanghb.com.wanandroid.util.IntentUtil;
 
-public class SearchListActivity extends BaseListActivity<SearchListPresenter> implements SearchListContract.View, BaseQuickAdapter.OnItemClickListener,BaseQuickAdapter.OnItemChildClickListener {
+import static kanghb.com.wanandroid.util.Constant.ARG_PARAM1;
+import static kanghb.com.wanandroid.util.Constant.ARG_PARAM2;
 
+/**
+ * 创建时间：2018/11/5
+ * 编写人：kanghb
+ * 功能描述：
+ */
+public class WechatListFragment extends BaseListFragment<WechatListPresenter> implements WechatListContract.View, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
     @BindView(R.id.rv_main)
     RecyclerView rvMain;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.tool_bar)
-    Toolbar toolBar;
-    private ArticleAdapter adapter;
+
+    private int id;
     private List<ArticleBean> articleBeanList;
-    private String key;
+    private WechatListAdapter adapter;
+    private int currentPage = 1;
 
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
+        Bundle bundle = getArguments();
+        id = bundle.getInt(ARG_PARAM1);
         articleBeanList = new ArrayList<>();
-        adapter = new ArticleAdapter(R.layout.item_article, articleBeanList);
+        adapter = new WechatListAdapter(R.layout.item_wechat_list, articleBeanList);
         adapter.setOnItemClickListener(this);
         adapter.setOnItemChildClickListener(this);
         rvMain.setLayoutManager(new LinearLayoutManager(mContext));
         rvMain.setAdapter(adapter);
-        setRefresh();
+        setAuto();
+
     }
 
-    private void setRefresh() {
+
+    public static WechatListFragment newInstance(int param1, String param2) {
+        WechatListFragment fragment = new WechatListFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    protected void initPresenter() {
+        mPresenter = new WechatListPresenter();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_list_wechat;
+    }
+
+
+    private void setAuto() {
         smartRefreshLayout.autoRefresh();
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.getSearchListArticles(key);
+                currentPage = 1;
+                mPresenter.getRefreshWechatArticleList(id, currentPage);
             }
         });
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.getMoreSearchListArticles(key);
+                currentPage++;
+                mPresenter.getMoreWechatArticleList(id, currentPage);
             }
         });
+
+    }
+
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, view, getString(R.string.shareView));
+        ArticleBean articleBean = articleBeanList.get(position);
+        IntentUtil.startArticleDetailActivity(mContext, activityOptionsCompat,
+                articleBean.getId(), articleBean.getTitle(), articleBean.getLink(), articleBean.isCollect(), false);
     }
 
     @Override
-    protected void initToolBar() {
-        super.initToolBar();
-        key = getIntent().getStringExtra(Constant.ARG_PARAM1);
-        setToolBar(toolBar, key);
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.activity_search_list;
-    }
-
-    @Override
-    protected void initPresenter() {
-        mPresenter = new SearchListPresenter();
-    }
-
-    @Override
-    public void showSearchListArticles(ArticleListBean articleListBean) {
+    public void showRefreshWechatArticleList(ArticleListBean articleListBean) {
         smartRefreshLayout.finishRefresh();
-        articleBeanList = articleListBean.getDatas();
-        adapter.replaceData(articleBeanList);
+        articleBeanList.clear();
+        adapter.replaceData(articleListBean.getDatas());
     }
 
     @Override
-    public void showMoreSearchListArticles(ArticleListBean articleListBean) {
-        if (articleListBean == null || articleListBean.getDatas() == null || articleListBean.getDatas().size() == 0) {
+    public void showMoreWechatArticleList(ArticleListBean articleListBean) {
+        if (articleListBean.getDatas().size() == 0) {
             smartRefreshLayout.finishLoadMoreWithNoMoreData();
+            currentPage--;
         } else {
             smartRefreshLayout.finishLoadMore();
-            articleBeanList.addAll(articleListBean.getDatas());
-            adapter.replaceData(articleBeanList);
+            adapter.addData(articleListBean.getDatas());
         }
 
     }
 
     @Override
     public void showAddCollectArticle(int position, ArticleBean articleBean) {
-        adapter.setData(position,articleBean);
+        adapter.setData(position, articleBean);
     }
 
     @Override
     public void showCancelCollectArticle(int position, ArticleBean articleBean) {
-        adapter.setData(position,articleBean);
-    }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, getString(R.string.shareView));
-        ArticleBean articleBean = articleBeanList.get(position);
-        IntentUtil.startArticleDetailActivity(mContext, activityOptionsCompat,
-                articleBean.getId(), articleBean.getTitle(), articleBean.getLink(), articleBean.isCollect(),false);
+        adapter.setData(position, articleBean);
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         switch (view.getId()) {
-            case R.id.iv_article_collect:
+            case R.id.iv_wechat_collect:
                 if (mPresenter.getLoginStatus()) {
                     if (adapter.getData().size() <= 0 || position >= adapter.getData().size()) {
                         return;
@@ -144,6 +161,6 @@ public class SearchListActivity extends BaseListActivity<SearchListPresenter> im
                 }
                 break;
         }
-
     }
+
 }

@@ -29,5 +29,7 @@ public interface ISharePreference {
 
     int getCurrentItem();
 
+    void removeCookie();
+
 
 }

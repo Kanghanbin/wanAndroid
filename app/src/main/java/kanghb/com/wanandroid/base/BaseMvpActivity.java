@@ -80,6 +80,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
     @Override
     public void startLoginActivity() {
+        onBackPressedSupport();
         IntentUtil.startLoginActivity(mContext);
         mPresenter.setLoginStatus(false);
         mPresenter.setLoginAccount("");

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import kanghb.com.wanandroid.model.bean.ToDoBean;
+import kanghb.com.wanandroid.model.bean.WxarticleBean;
 import kanghb.com.wanandroid.ui.activity.ArticleDetailActivity;
 import kanghb.com.wanandroid.ui.activity.HotKeySearchActivity;
 import kanghb.com.wanandroid.ui.activity.LoginActivity;
@@ -15,6 +16,8 @@ import kanghb.com.wanandroid.ui.activity.SearchListActivity;
 import kanghb.com.wanandroid.ui.activity.TodoActivity;
 import kanghb.com.wanandroid.ui.activity.TodoDetailActivity;
 import kanghb.com.wanandroid.ui.activity.UseActivity;
+import kanghb.com.wanandroid.ui.activity.WechatActivity;
+import kanghb.com.wanandroid.ui.activity.WechatSearchActivity;
 
 /**
  * 创建时间：2018/11/7
@@ -91,9 +94,21 @@ public class IntentUtil {
         mActivity.startActivity(intent);
     }
 
-    public static void startTodoDetailActiviy(Context mActivity, ToDoBean toDoBean) {
-        Intent intent = new Intent(mActivity, TodoDetailActivity.class);
-        intent.putExtra(Constant.TODOBEAN,toDoBean);
+    public static void startTodoDetailActiviy(Context mContext, ToDoBean toDoBean) {
+        Intent intent = new Intent(mContext, WechatSearchActivity.class);
+        intent.putExtra(Constant.TODOBEAN, toDoBean);
+        mContext.startActivity(intent);
+    }
+
+    public static void startWechatActivity(Context mActivity) {
+        Intent intent = new Intent(mActivity, WechatActivity.class);
         mActivity.startActivity(intent);
     }
+
+    public static void startWechatSearchActivtiy(Context mActivity, WxarticleBean wxarticleBean) {
+        Intent intent = new Intent(mActivity, WechatSearchActivity.class);
+        intent.putExtra(Constant.WXARTICLEBEAN, wxarticleBean);
+        mActivity.startActivity(intent);
+    }
+
 }

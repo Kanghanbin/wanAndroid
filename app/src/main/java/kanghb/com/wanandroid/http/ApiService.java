@@ -3,6 +3,7 @@ package kanghb.com.wanandroid.http;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import kanghb.com.wanandroid.model.bean.ArticleBean;
 import kanghb.com.wanandroid.model.bean.ArticleListBean;
 import kanghb.com.wanandroid.model.bean.BannerBean;
 import kanghb.com.wanandroid.model.bean.DoneListBean;
@@ -14,6 +15,7 @@ import kanghb.com.wanandroid.model.bean.ProjectBean;
 import kanghb.com.wanandroid.model.bean.ToDoBean;
 import kanghb.com.wanandroid.model.bean.TodoListBean;
 import kanghb.com.wanandroid.model.bean.UserBean;
+import kanghb.com.wanandroid.model.bean.WxarticleBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -27,6 +29,8 @@ import retrofit2.http.Query;
  * 功能描述：
  */
 public interface ApiService {
+    //登录相关
+
     @POST("/user/login")
     @FormUrlEncoded
     Flowable<BaseResponse<UserBean>> login(@Field("username") String username, @Field("password") String password);
@@ -34,6 +38,11 @@ public interface ApiService {
     @POST("/user/register")
     @FormUrlEncoded
     Flowable<BaseResponse<UserBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
+    @GET("/user/logout/json")
+    Flowable<BaseResponse<String>> logout();
+
+    //四个模块相关
 
     @GET("/banner/json")
     Flowable<BaseResponse<List<BannerBean>>> getBannerList();
@@ -145,4 +154,16 @@ public interface ApiService {
 
     @POST("/lg/todo/listdone/{type}/json/{page}")
     Flowable<BaseResponse<DoneListBean>> listDoneList(@Path("type") int type, @Path("page") int page);
+
+
+    //公众号相关
+
+    @GET("/wxarticle/chapters/json")
+    Flowable<BaseResponse<List<WxarticleBean>>> getWxarticleList();
+
+    @GET("/wxarticle/list/{id}/{page}/json")
+    Flowable<BaseResponse<ArticleListBean>> getHistoryWxarticleList(@Path("id") int id, @Path("page") int page);
+
+    @GET("/wxarticle/list/{id}/{page}/json")
+    Flowable<BaseResponse<ArticleListBean>> getSearchWxarticleList(@Path("id") int id, @Path("page") int page, @Query("k") String key);
 }

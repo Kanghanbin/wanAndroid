@@ -10,12 +10,16 @@ import kanghb.com.wanandroid.base.BaseView;
  */
 public interface MainContract {
     interface View extends BaseView {
-
+        void showLogout();
     }
 
     interface Presenter extends BasePresenter<View> {
         void setCurrentItem(int pos);
 
         int getCurrentItem();
+
+        void logout();
+
+
     }
 }

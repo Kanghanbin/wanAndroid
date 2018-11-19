@@ -60,4 +60,16 @@
     <string name="addtodo_success">添加todo成功</string>
     <string name="update_success">修改Todo成功</string>
     <string name="todo_empty_msg">标题，内容，日期均不能为空</string>
+    <string name="wechat_search">公众号搜索</string>
+    <string name="logout_success">已经成功退出当前账号，请重新登录</string>
+
+    <string name="about_content"><![CDATA[
+        <h3>软件内容:</h3>
+        <p>\t\t本软件是一款本人抽空写的安卓练手项目，后台数据由鸿洋大神的玩andoird提供，其实网上已经有很多版本优秀的的Wanandroid 安卓项目了，但是觉得自己不亲自实践就永远不会遇到
+        开发中的问题。在这过程中，也会思考一些自己的东西。功能基本已经完成，可能还不够细致，后期有空再更新。
+        </p>
+
+        <h3>源码位置:</h3>
+        <p>\t\t项目地址：https://github.com/Kanghanbin/wanAndroid.git本软件开源，如果你发现任何错误，欢迎勾搭，我会虚心学习，感谢各位大佬们支持</p>
+    ]]></string>
 </resources>

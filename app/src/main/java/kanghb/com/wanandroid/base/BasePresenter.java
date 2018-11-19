@@ -26,4 +26,6 @@ public interface BasePresenter<T extends BaseView> {
 
     void setLoginStatus(boolean b);
 
+    void clearCookie();
+
 }
