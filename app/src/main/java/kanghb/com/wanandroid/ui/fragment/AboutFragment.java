@@ -29,6 +29,7 @@ public class AboutFragment extends BaseFragment {
     protected int getLayoutId() {
         return R.layout.fragment_about;
     }
+
     public static AboutFragment newInstance(String param1, String param2) {
         AboutFragment fragment = new AboutFragment();
         Bundle args = new Bundle();
@@ -37,8 +38,9 @@ public class AboutFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected void initEventAndData() {
-        tvContent.setText(HtmlCompat.fromHtml(getString(R.string.about_content),HtmlCompat.FROM_HTML_MODE_COMPACT));
+        tvContent.setText(HtmlCompat.fromHtml(getString(R.string.about_content), HtmlCompat.FROM_HTML_MODE_COMPACT));
     }
 }
