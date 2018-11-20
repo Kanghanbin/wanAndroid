@@ -2,9 +2,12 @@ package kanghb.com.wanandroid.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +32,7 @@ import kanghb.com.wanandroid.ui.fragment.HierarchyFragment;
 import kanghb.com.wanandroid.ui.fragment.HomeFragment;
 import kanghb.com.wanandroid.ui.fragment.NavigationFragment;
 import kanghb.com.wanandroid.ui.fragment.ProjectFragment;
+import kanghb.com.wanandroid.ui.fragment.SettingFragment;
 import kanghb.com.wanandroid.util.Constant;
 import kanghb.com.wanandroid.util.IntentUtil;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -53,6 +57,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     private NavigationFragment navigationFragment;
     private CollectFragment collectFragment;
     private AboutFragment aboutFragment;
+    private SettingFragment settingFragment;
 
     private int currentFragmentType = Constant.TYPE_HOME;
     private int hideFragmentType = Constant.TYPE_HOME;
@@ -75,6 +80,22 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //切换夜间模式成功后直接去设置界面
+        if (savedInstanceState != null) {
+            setToolBarTitle(Constant.TYPE_SETTING);
+            switchFragment();
+            currentMenuItem = menuItemSetting;
+            if (lastMenuItem != null) {
+                lastMenuItem.setChecked(false);
+            }
+            currentMenuItem.setChecked(true);
+            lastMenuItem = currentMenuItem;
+        }
+    }
+
+    @Override
     protected void initEventAndData() {
         super.initEventAndData();
         initFragments();
@@ -91,7 +112,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         navigationFragment = NavigationFragment.newInstance(null, null);
         collectFragment = CollectFragment.newInstance(null, null);
         aboutFragment = AboutFragment.newInstance(null, null);
-        loadMultipleRootFragment(R.id.fl_contain, 0, homeFragment, hierarchyFragment, navigationFragment, projectFragment, collectFragment, aboutFragment);
+        settingFragment = SettingFragment.newInstance(null, null);
+        loadMultipleRootFragment(R.id.fl_contain, 0, homeFragment, hierarchyFragment, navigationFragment, projectFragment, collectFragment, aboutFragment, settingFragment);
         bottonNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -141,6 +163,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
             case Constant.TYPE_ABOUT:
                 toolBar.setTitle(getString(R.string.about));
                 break;
+            case Constant.TYPE_SETTING:
+                toolBar.setTitle(getString(R.string.setting));
+                break;
 
         }
 
@@ -150,11 +175,17 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     private void switchFragment() {
         drawerlayout.closeDrawers();
         if (currentFragmentType == Constant.TYPE_HOME) {
-            menuHotsearch.setVisible(true);
-            menuUse.setVisible(true);
+            if (menuHotsearch != null && menuUse != null) {
+                menuHotsearch.setVisible(true);
+                menuUse.setVisible(true);
+            }
+
         } else {
-            menuHotsearch.setVisible(false);
-            menuUse.setVisible(false);
+            if (menuHotsearch != null && menuUse != null) {
+                menuHotsearch.setVisible(false);
+                menuUse.setVisible(false);
+            }
+
         }
         if (currentFragmentType >= Constant.TYPE_HOME && currentFragmentType <= Constant.TYPE_PROJECT) {
             bottonNavigation.setVisibility(View.VISIBLE);
@@ -211,6 +242,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 return collectFragment;
             case Constant.TYPE_ABOUT:
                 return aboutFragment;
+            case Constant.TYPE_SETTING:
+                return settingFragment;
         }
         return homeFragment;
     }
@@ -290,7 +323,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
                     mPresenter.setCurrentItem(hideFragmentType);
                 }
-
+                setToolBarTitle(Constant.TYPE_SETTING);
+                switchFragment();
+                currentMenuItem = menuItemSetting;
                 break;
             case R.id.item_about:
                 if (hideFragmentType >= Constant.TYPE_HOME && hideFragmentType <= Constant.TYPE_PROJECT) {
@@ -365,4 +400,14 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         showToast(getString(R.string.logout_success));
         startLoginActivity();
     }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            ActivityCompat.finishAfterTransition(this);
+        }
+    }
+
 }

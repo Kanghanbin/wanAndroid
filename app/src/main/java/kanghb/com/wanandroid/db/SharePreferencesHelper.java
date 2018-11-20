@@ -46,17 +46,32 @@ public class SharePreferencesHelper implements ISharePreference {
 
     @Override
     public void setLoginStatus(boolean b) {
-       spUtils.put(Constant.LOGIN_STATUS,b);
+        spUtils.put(Constant.LOGIN_STATUS, b);
     }
 
     @Override
     public void setCookie(HashSet<String> cookie) {
-        spUtils.put(Constant.COOKIES,cookie);
+        spUtils.put(Constant.COOKIES, cookie);
     }
 
     @Override
     public void setCurrentItem(int currentItem) {
-        spUtils.put(Constant.CURRENT_ITEM,currentItem);
+        spUtils.put(Constant.CURRENT_ITEM, currentItem);
+    }
+
+    @Override
+    public void setNightMode(boolean b) {
+        spUtils.put(Constant.NIGHT_MODE, b);
+    }
+
+    @Override
+    public void setNoImage(boolean b) {
+        spUtils.put(Constant.NOIMAGE_MODE, b);
+    }
+
+    @Override
+    public void setAutoCache(boolean b) {
+        spUtils.put(Constant.AUTO_CACHE, b);
     }
 
     @Override
@@ -76,7 +91,7 @@ public class SharePreferencesHelper implements ISharePreference {
 
     @Override
     public HashSet<String> getCookie() {
-        return (HashSet<String>) spUtils.getStringSet(Constant.COOKIES,new HashSet<String>());
+        return (HashSet<String>) spUtils.getStringSet(Constant.COOKIES, new HashSet<String>());
     }
 
     @Override
@@ -87,6 +102,21 @@ public class SharePreferencesHelper implements ISharePreference {
     @Override
     public void removeCookie() {
         spUtils.remove(Constant.COOKIES);
+    }
+
+    @Override
+    public boolean getNightMode() {
+        return spUtils.getBoolean(Constant.NIGHT_MODE);
+    }
+
+    @Override
+    public boolean getNoImageMode() {
+        return spUtils.getBoolean(Constant.NOIMAGE_MODE);
+    }
+
+    @Override
+    public boolean getAutoCache() {
+        return spUtils.getBoolean(Constant.AUTO_CACHE);
     }
 
 

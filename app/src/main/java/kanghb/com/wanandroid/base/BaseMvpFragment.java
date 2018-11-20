@@ -68,6 +68,11 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
     }
 
     @Override
+    public void showUseNightMode(boolean b) {
+
+    }
+
+    @Override
     public void startLoginActivity() {
         IntentUtil.startLoginActivity(mActivity);
     }

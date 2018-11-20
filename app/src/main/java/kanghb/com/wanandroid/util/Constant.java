@@ -64,6 +64,12 @@ public class Constant {
 
     public static final String CURRENT_ITEM = "current_item";
 
+    public static final String NIGHT_MODE = "night_mode";
+
+    public static final String NOIMAGE_MODE = "noimage_mode";
+
+    public static final String AUTO_CACHE = "auto_cache";
+
 
     public static final String ARTICLE_LINK = "article_link";
 

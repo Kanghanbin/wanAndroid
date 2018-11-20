@@ -70,6 +70,11 @@
         </p>
 
         <h3>源码位置:</h3>
-        <p>\t\t项目地址：https://github.com/Kanghanbin/wanAndroid本软件开源，如果你发现任何错误，欢迎勾搭，我会虚心学习，感谢各位大佬们支持</p>
+        <p>\t\t项目地址：<a href="https://github.com/Kanghanbin/wanAndroid" target="_blank">https://github.com/Kanghanbin/wanAndroid</a>本软件开源，如果你发现任何错误，欢迎勾搭，我会虚心学习，感谢各位大佬们支持</p>
     ]]></string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="setting_night">夜间模式</string>
+    <string name="cast_night_mode_failed">切换夜间模式失败</string>
+    <string name="setting_cache">自动缓存</string>
+    <string name="setting_image">无图模式</string>
 </resources>

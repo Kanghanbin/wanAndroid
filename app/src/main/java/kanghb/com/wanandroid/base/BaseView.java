@@ -44,6 +44,6 @@ public interface BaseView {
 
     void showLoginPassword(String pwd);
 
-
+    void showUseNightMode(boolean b);
 
 }

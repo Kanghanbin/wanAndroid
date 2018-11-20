@@ -19,6 +19,12 @@ public interface ISharePreference {
 
     void setCurrentItem(int currentItem);
 
+    void setNightMode(boolean b);
+
+    void setNoImage(boolean b);
+
+    void setAutoCache(boolean b);
+
     String getLoginAccount();
 
     String getLoginPassword();
@@ -31,5 +37,10 @@ public interface ISharePreference {
 
     void removeCookie();
 
+    boolean getNightMode();
+
+    boolean getNoImageMode();
+
+    boolean getAutoCache();
 
 }

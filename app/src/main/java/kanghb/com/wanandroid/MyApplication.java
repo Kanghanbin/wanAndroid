@@ -1,6 +1,7 @@
 package kanghb.com.wanandroid;
 
 import android.app.Application;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.tencent.smtt.sdk.QbSdk;
@@ -25,6 +26,8 @@ public class MyApplication extends Application {
     }
 
     private void initSdk() {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         // 初始化LitePal数据库
         LitePal.initialize(instance);
         QbSdk.initX5Environment(instance, new QbSdk.PreInitCallback() {

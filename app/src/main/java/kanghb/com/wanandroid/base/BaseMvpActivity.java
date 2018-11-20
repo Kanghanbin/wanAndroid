@@ -2,6 +2,7 @@ package kanghb.com.wanandroid.base;
 
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -76,6 +77,18 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
     @Override
     public void onRetry() {
 
+    }
+
+    @Override
+    public void showUseNightMode(boolean isNight) {
+        if (isNight) {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        recreate();
     }
 
     @Override

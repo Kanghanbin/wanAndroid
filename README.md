@@ -43,3 +43,31 @@ src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/
 <img  width=40% height = 700
 src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/12.jpeg">
 </div>
+
+<div align="center">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/13.jpeg">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/14.jpeg">
+</div>
+
+<div align="center">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/15.jpeg">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/16.jpeg">
+</div>
+
+<div align="center">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/17.jpeg">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/18.jpeg">
+</div>
+
+<div align="center">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/19.jpeg">
+<img  width=40% height = 700
+src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/16.jpeg">
+</div>

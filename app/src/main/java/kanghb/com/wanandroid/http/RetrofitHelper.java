@@ -60,7 +60,7 @@ public class RetrofitHelper {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(loggingInterceptor);
         }
-        return  builder.build();
+        return builder.build();
     }
 
     public static RetrofitHelper getInstance() {

@@ -8,6 +8,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -16,6 +17,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import kanghb.com.wanandroid.R;
+import kanghb.com.wanandroid.db.SharePreferencesHelper;
 
 /**
  * 创建时间：2018/11/8
@@ -37,9 +39,9 @@ public class ProgressWebview extends WebView {
     }
 
     private void initView(Context context) {
-
+        WebSettings webSettings = getSettings();
         //开启js脚本支持
-        getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         //创建进度条
         progressbar = new ProgressBar(context, null,
@@ -54,13 +56,33 @@ public class ProgressWebview extends WebView {
         addView(progressbar);
 
         //适配手机大小
-        getSettings().setUseWideViewPort(true);
-        getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        getSettings().setLoadWithOverviewMode(true);
-        getSettings().setSupportZoom(true);
-        getSettings().setBuiltInZoomControls(true);
-        getSettings().setDisplayZoomControls(false);
-
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        //不显示缩放按钮
+        webSettings.setDisplayZoomControls(false);
+        if (SharePreferencesHelper.getInstance().getNoImageMode()) {
+            webSettings.setBlockNetworkImage(true);
+        } else {
+            webSettings.setBlockNetworkImage(false);
+        }
+        if (SharePreferencesHelper.getInstance().getAutoCache()) {
+            webSettings.setAppCacheEnabled(true);
+            webSettings.setDomStorageEnabled(true);
+            webSettings.setDatabaseEnabled(true);
+            if (NetworkUtils.isConnected()) {
+                webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+            } else {
+                webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            }
+        } else {
+            webSettings.setAppCacheEnabled(false);
+            webSettings.setDomStorageEnabled(false);
+            webSettings.setDatabaseEnabled(false);
+            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        }
 
         setWebChromeClient(new WVChromeClient());
         setWebViewClient(new WVClient());
