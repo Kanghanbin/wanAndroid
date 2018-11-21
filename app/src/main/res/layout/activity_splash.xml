@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_60"
+    android:paddingTop="@dimen/dp_60"
+    tools:context=".ui.activity.SplashActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_24"
+        android:textStyle="italic|bold" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnim_welcome"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginTop="@dimen/dp_20"
+        app:lottie_repeatCount="1"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="bubble.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnim_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_20"
+        app:lottie_fileName="bike_loading_animation.json" />
+
+</LinearLayout>

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import kanghb.com.wanandroid.R;
@@ -22,7 +24,7 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
 
     private int errorLayout = R.layout.view_error;
     private int loadLayout = R.layout.view_loading;
-    private AVLoadingIndicatorView avLoadingIndicatorView;
+    private LottieAnimationView lottieAnimationView;
     private Button btnRetry;
 
     private ViewGroup parentView;
@@ -44,7 +46,7 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
         View.inflate(mContext,loadLayout,parentView);
         viewLoading = findViewById(R.id.fl_loading);
         viewError = findViewById(R.id.ll_error);
-        avLoadingIndicatorView = findViewById(R.id.avliv);
+        lottieAnimationView = viewLoading.findViewById(R.id.lottieAnim);
         btnRetry = findViewById(R.id.btn_retry);
         rvMainView.setVisibility(View.VISIBLE);
         viewLoading.setVisibility(View.GONE);
@@ -65,11 +67,12 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
         viewLoading.setVisibility(View.VISIBLE);
         rvMainView.setVisibility(View.GONE);
         viewError.setVisibility(View.GONE);
-        if(avLoadingIndicatorView == null){
-            avLoadingIndicatorView = new AVLoadingIndicatorView(mContext);
-            avLoadingIndicatorView.setIndicatorColor(ContextCompat.getColor(mContext,R.color.colorAccent));
+        if (lottieAnimationView == null) {
+            lottieAnimationView = new LottieAnimationView(mContext);
+            lottieAnimationView.setAnimation("bounching_ball.json");
+            lottieAnimationView.setRepeatMode(LottieDrawable.RESTART);
+            lottieAnimationView.playAnimation();
         }
-        avLoadingIndicatorView.show();
     }
 
     @Override
@@ -77,8 +80,8 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
         viewLoading.setVisibility(View.VISIBLE);
         rvMainView.setVisibility(View.GONE);
         viewError.setVisibility(View.GONE);
-        if(avLoadingIndicatorView != null ){
-            avLoadingIndicatorView.hide();
+        if (lottieAnimationView != null) {
+            lottieAnimationView.cancelAnimation();
         }
     }
 

@@ -7,14 +7,14 @@
     android:gravity="center"
     android:orientation="vertical"
     android:layout_gravity="center">
-  <com.wang.avi.AVLoadingIndicatorView
-      android:id="@+id/avliv"
+  <com.airbnb.lottie.LottieAnimationView
+      android:id="@+id/lottieAnim"
       android:layout_width="80dp"
       android:layout_height="80dp"
       android:layout_gravity="center"
-      app:indicatorColor="@color/colorAccent"
-      app:indicatorName="LineScaleIndicator"
-      />
+      app:lottie_fileName="bounching_ball.json"
+      app:lottie_loop="true"
+      app:lottie_autoPlay="true"/>
 
 
 </FrameLayout>
