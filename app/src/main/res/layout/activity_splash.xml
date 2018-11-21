@@ -24,7 +24,7 @@
         android:layout_width="@dimen/dp_200"
         android:layout_height="@dimen/dp_200"
         android:layout_marginTop="@dimen/dp_20"
-        app:lottie_repeatCount="1"
+        app:lottie_repeatCount="2"
         app:lottie_autoPlay="true"
         app:lottie_fileName="bubble.json" />
 

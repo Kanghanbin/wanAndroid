@@ -2,18 +2,17 @@ package kanghb.com.wanandroid.ui.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.BaseMvpActivity;
 import kanghb.com.wanandroid.contract.SplashContract;
 import kanghb.com.wanandroid.presenter.SplashPresenter;
+import kanghb.com.wanandroid.util.StatusBarUtil;
 
 public class SplashActivity extends BaseMvpActivity<SplashPresenter> implements SplashContract.View {
 
@@ -31,6 +30,12 @@ public class SplashActivity extends BaseMvpActivity<SplashPresenter> implements 
     @Override
     protected int getLayout() {
         return R.layout.activity_splash;
+    }
+
+    @Override
+    protected void initToolBar() {
+        super.initToolBar();
+        StatusBarUtil.immersive(this);
     }
 
     @Override

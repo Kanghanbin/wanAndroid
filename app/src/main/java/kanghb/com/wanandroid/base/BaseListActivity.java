@@ -17,7 +17,7 @@ import kanghb.com.wanandroid.R;
  * 编写人：kanghb
  * 功能描述：
  */
-public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvpActivity<T> {
+public abstract class BaseListActivity<T extends BasePresenter> extends BaseMvpActivity<T> {
     //    private static final int LOADING = 0x00;
 //    private static final int SUCCESS = 0x01;
 //    private static final int FAIL = 0x02;
@@ -35,15 +35,15 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
     @Override
     protected void initEventAndData() {
         rvMainView = findViewById(R.id.rv_main);
-        if(rvMainView == null){
+        if (rvMainView == null) {
             throw new IllegalStateException("The subclass of BaseMvpActivity must contain a View named 'rv_main'.");
         }
-        if(!(rvMainView.getParent() instanceof ViewGroup)){
+        if (!(rvMainView.getParent() instanceof ViewGroup)) {
             throw new IllegalStateException("rv_main's ParentView should be a ViewGroup.");
         }
         parentView = (ViewGroup) rvMainView.getParent();
-        View.inflate(mContext,errorLayout,parentView);
-        View.inflate(mContext,loadLayout,parentView);
+        View.inflate(mContext, errorLayout, parentView);
+        View.inflate(mContext, loadLayout, parentView);
         viewLoading = findViewById(R.id.fl_loading);
         viewError = findViewById(R.id.ll_error);
         lottieAnimationView = viewLoading.findViewById(R.id.lottieAnim);
@@ -59,7 +59,6 @@ public abstract class BaseListActivity<T extends  BasePresenter> extends BaseMvp
         });
 
     }
-
 
 
     @Override

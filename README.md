@@ -29,6 +29,13 @@ WanAndroid，一款每日推荐优质文章App,项目涉及API均来自鸿洋大
 
 <div align="center">
 <img  width=40% height = 700
+src="screenshots/2.gif">
+<img  width=40% height = 700
+src="screenshots/1.gif">
+</div>
+
+<div align="center">
+<img  width=40% height = 700
 src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/1.jpeg">
 <img  width=40% height =700
 src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/2.jpeg">
