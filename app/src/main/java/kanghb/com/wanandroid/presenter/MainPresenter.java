@@ -63,7 +63,7 @@ public class MainPresenter extends RxPresenter<MainContract.View> implements Mai
     public void logout() {
         addSubscribe(apiService.logout()
                 .compose(RxUtil.<BaseResponse<String>>rxFlowableSchedulerHelper())
-                .compose(RxUtil.<String>handleResult())
+                .compose(RxUtil.<String>handleCollectResult(MyApplication.getInstance().getString(R.string.logout_success)))
                 .subscribeWith(new BaseSubscriber<String>(mView) {
                     @Override
                     public void onNext(String s) {

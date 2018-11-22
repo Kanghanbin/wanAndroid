@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.view.WindowManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -35,7 +36,8 @@ public class SplashActivity extends BaseMvpActivity<SplashPresenter> implements 
     @Override
     protected void initToolBar() {
         super.initToolBar();
-        StatusBarUtil.immersive(this);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        StatusBarUtil.immersive(this);
     }
 
     @Override

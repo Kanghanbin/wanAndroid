@@ -397,7 +397,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     public void showLogout() {
         menuItemLogout.setVisible(false);
-        showToast(getString(R.string.logout_success));
         startLoginActivity();
     }
 

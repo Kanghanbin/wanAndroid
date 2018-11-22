@@ -17,7 +17,7 @@ import kanghb.com.wanandroid.contract.HomeContract;
  */
 public class GlideUtil {
     public static void loadImage(Context context, String url, ImageView view) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.ic_launcher);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.icon_placeholder);
         Glide.with(context).load(url).apply(options).into(view);
     }
 }
