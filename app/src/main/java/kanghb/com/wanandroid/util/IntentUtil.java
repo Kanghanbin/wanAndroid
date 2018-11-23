@@ -22,7 +22,7 @@ import kanghb.com.wanandroid.ui.activity.WechatSearchActivity;
 /**
  * 创建时间：2018/11/7
  * 编写人：kanghb
- * 功能描述：
+ * 功能描述：页面跳转类
  */
 public class IntentUtil {
     /**
@@ -95,7 +95,7 @@ public class IntentUtil {
     }
 
     public static void startTodoDetailActiviy(Context mContext, ToDoBean toDoBean) {
-        Intent intent = new Intent(mContext, WechatSearchActivity.class);
+        Intent intent = new Intent(mContext, TodoDetailActivity.class);
         intent.putExtra(Constant.TODOBEAN, toDoBean);
         mContext.startActivity(intent);
     }

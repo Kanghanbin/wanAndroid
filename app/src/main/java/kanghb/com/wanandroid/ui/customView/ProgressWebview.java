@@ -25,9 +25,11 @@ import kanghb.com.wanandroid.db.SharePreferencesHelper;
  * 功能描述：一个自带进度条的x5内核webview
  */
 public class ProgressWebview extends WebView {
-    private ProgressBar progressbar;  //进度条
+    //进度条
+    private ProgressBar progressbar;
 
-    private int progressHeight = 10;  //进度条的高度，默认10px
+    //进度条的高度，默认10px
+    private int progressHeight = 15;
 
     public ProgressWebview(Context context) {
         super(context);
@@ -44,8 +46,7 @@ public class ProgressWebview extends WebView {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         //创建进度条
-        progressbar = new ProgressBar(context, null,
-                android.R.attr.progressBarStyleHorizontal);
+        progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
         //设置加载进度条的高度
         progressbar.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, progressHeight));
 
@@ -89,7 +90,9 @@ public class ProgressWebview extends WebView {
     }
 
 
-    //进度显示
+    /**
+     * 进度显示
+     */
     private class WVChromeClient extends WebChromeClient {
 
 

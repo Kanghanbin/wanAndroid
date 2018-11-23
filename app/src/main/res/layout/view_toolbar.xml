@@ -7,5 +7,5 @@
     android:fitsSystemWindows="true"
     app:titleTextColor="@android:color/white"
     android:background="?attr/colorPrimaryDark"
-    app:navigationIcon="@mipmap/icon_back"
+    android:theme="@style/AppTheme.AppBarOverlay"
     android:minHeight="?attr/actionBarSize" />

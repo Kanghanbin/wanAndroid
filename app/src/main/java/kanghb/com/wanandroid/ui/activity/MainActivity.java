@@ -252,7 +252,33 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     protected void initToolBar() {
         super.initToolBar();
         setToolBar(toolBar, getString(R.string.home_pager));
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerlayout, toolBar, R.string.drawer_open, R.string.drawer_close);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerlayout, toolBar, R.string.drawer_open, R.string.drawer_close){
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                //获取mDrawerLayout中的第一个子布局，也就是布局中的RelativeLayout
+                //获取抽屉的view
+                View mContent = drawerlayout.getChildAt(0);
+                float scale = 1 - slideOffset;
+                float endScale = 0.8f + scale * 0.2f;
+                float startScale = 1 - 0.3f * scale;
+
+                //设置左边菜单滑动后的占据屏幕大小
+                drawerView.setScaleX(startScale);
+                drawerView.setScaleY(startScale);
+                //设置菜单透明度
+                drawerView.setAlpha(0.6f + 0.4f * (1 - scale));
+
+                //设置内容界面水平和垂直方向偏转量
+                //在滑动时内容界面的宽度为 屏幕宽度减去菜单界面所占宽度
+                mContent.setTranslationX(drawerView.getMeasuredWidth() * (1 - scale));
+                //设置内容界面操作无效（比如有button就会点击无效）
+                mContent.invalidate();
+                //设置右边菜单滑动后的占据屏幕大小
+                mContent.setScaleX(endScale);
+                mContent.setScaleY(endScale);
+            }
+        };
         actionBarDrawerToggle.syncState();
         drawerlayout.addDrawerListener(actionBarDrawerToggle);
     }
