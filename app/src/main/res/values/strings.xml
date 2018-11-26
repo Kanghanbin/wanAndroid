@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OneAndroid</string>
+    <string name="app_name">玩Android</string>
     <string name="error_tips">糟糕！加载失败了ヽ(≧Д≦)ノ\n 告诉大佬一些可能的原因：\n1.惨不忍睹的网络环境\n 2.服务器君的不定期抽风\n 3.OneAndroid现在心情不好拒绝服务喔~</string>
     <string name="retry">重新加载</string>
     <string name="prompt_password">请输入正确的密码</string>
@@ -78,4 +78,6 @@
     <string name="setting_cache">自动缓存</string>
     <string name="setting_image">无图模式</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="share_type_url">%1$s 分享\n标题：%2$s\n 链接：%3$s</string>
+    <string name="write_permission_not_allowed">读写权限不允许</string>
 </resources>

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.smtt.sdk.WebView;
 
 import java.lang.reflect.Method;
@@ -40,6 +41,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
     private boolean isCollectPage;
     private ArticleBean articleBean;
     private MenuItem collectMenuItem;
+
     @Override
     protected void initPresenter() {
         mPresenter = new ArticleDetailPresenter();
@@ -48,9 +50,9 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
 
     @Override
     protected void initEventAndData() {
-        if(articleBean != null){
+        if (articleBean != null) {
             articleDetailWebView.loadUrl(articleBean.getLink());
-        }else if(articleLink != null){
+        } else if (articleLink != null) {
             articleDetailWebView.loadUrl(articleLink);
         }
 
@@ -66,23 +68,23 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
         super.initToolBar();
         getBundleData();
         if (title != null) {
-            setToolBar(toolBar, HtmlCompat.fromHtml(title,HtmlCompat.FROM_HTML_MODE_COMPACT).toString());
+            setToolBar(toolBar, HtmlCompat.fromHtml(title, HtmlCompat.FROM_HTML_MODE_COMPACT).toString());
         }
-        if(articleBean != null){
-            setToolBar(toolBar, HtmlCompat.fromHtml(articleBean.getTitle(),HtmlCompat.FROM_HTML_MODE_COMPACT).toString());
+        if (articleBean != null) {
+            setToolBar(toolBar, HtmlCompat.fromHtml(articleBean.getTitle(), HtmlCompat.FROM_HTML_MODE_COMPACT).toString());
         }
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_acticle,menu);
+        getMenuInflater().inflate(R.menu.menu_acticle, menu);
         collectMenuItem = menu.findItem(R.id.item_collect);
         isCollect = getIntent().getExtras().getBoolean(Constant.IS_COLLECT);
-        if(isCollect){
+        if (isCollect) {
             collectMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);
             collectMenuItem.setTitle(R.string.uncollect);
-        }else {
+        } else {
             collectMenuItem.setIcon(R.mipmap.ic_toolbar_like_n);
             collectMenuItem.setTitle(R.string.addcollect);
         }
@@ -93,7 +95,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_share:
-//                mPresenter.shareEventPermissionVerify(new RxPermissions(this));
+               mPresenter.shareEventPermissionVerify(new RxPermissions(this));
                 break;
             case R.id.item_collect:
                 collectEvent();
@@ -106,17 +108,29 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void shareEvent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_type_url, getString(R.string.app_name), title, articleLink));
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
+
+    @Override
+    public void shareError() {
+        showToast(getString(R.string.write_permission_not_allowed));
+    }
 
     private void collectEvent() {
-        if(!mPresenter.getLoginStatus()){
+        if (!mPresenter.getLoginStatus()) {
             startLoginActivity();
-        }else {
-            if(collectMenuItem.getTitle().equals(getString(R.string.uncollect))){
+        } else {
+            if (collectMenuItem.getTitle().equals(getString(R.string.uncollect))) {
                 mPresenter.cancelCollect(articleId);
-            }else {
-                if(isCollectPage){
+            } else {
+                if (isCollectPage) {
                     mPresenter.cancelCollectFromCollect(articleId);
-                }else {
+                } else {
                     mPresenter.addCollect(articleId);
                 }
 
@@ -129,7 +143,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
      * 让菜单同时显示图标和文字
      *
      * @param featureId Feature id
-     * @param menu Menu
+     * @param menu      Menu
      * @return menu if opened
      */
     @Override
@@ -147,6 +161,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
         }
         return super.onMenuOpened(featureId, menu);
     }
+
     private void getBundleData() {
         bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -159,6 +174,7 @@ public class ArticleDetailActivity extends BaseMvpActivity<ArticleDetailPresente
         }
 
     }
+
     @Override
     public void showAddCollect() {
         collectMenuItem.setIcon(R.mipmap.ic_toolbar_like_p);

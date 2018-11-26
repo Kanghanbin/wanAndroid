@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'org.litepal.android:java:3.0.0'
     implementation 'com.airbnb.android:lottie:2.7.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     //butterknife
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'

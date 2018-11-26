@@ -1,5 +1,7 @@
 package kanghb.com.wanandroid.contract;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import java.util.List;
 
 import kanghb.com.wanandroid.base.BasePresenter;
@@ -16,6 +18,10 @@ public interface ArticleDetailContract {
         void showAddCollect();
 
         void showCancelCollect();
+
+        void shareEvent();
+
+        void shareError();
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -25,5 +31,7 @@ public interface ArticleDetailContract {
         void cancelCollect(int id);
 
         void cancelCollectFromCollect(int id);
+
+        void shareEventPermissionVerify(RxPermissions rxPermissions);
     }
 }

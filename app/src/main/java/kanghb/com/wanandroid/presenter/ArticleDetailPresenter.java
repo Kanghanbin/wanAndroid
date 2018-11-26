@@ -1,7 +1,11 @@
 package kanghb.com.wanandroid.presenter;
 
+import android.Manifest;
 import android.app.Application;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import io.reactivex.functions.Consumer;
 import kanghb.com.wanandroid.MyApplication;
 import kanghb.com.wanandroid.R;
 import kanghb.com.wanandroid.base.RxPresenter;
@@ -59,5 +63,20 @@ public class ArticleDetailPresenter extends RxPresenter<ArticleDetailContract.Vi
                         mView.showCancelCollect();
                     }
                 }));
+    }
+
+    @Override
+    public void shareEventPermissionVerify(RxPermissions rxPermissions) {
+        addSubscribe(rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        .subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if(aBoolean){
+                    mView.shareEvent();
+                }else {
+                    mView.shareError();
+                }
+            }
+        }));
     }
 }

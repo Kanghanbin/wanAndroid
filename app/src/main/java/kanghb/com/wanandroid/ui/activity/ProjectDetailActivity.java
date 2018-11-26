@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import java.lang.reflect.Method;
 
 import butterknife.BindView;
@@ -110,7 +112,7 @@ public class ProjectDetailActivity extends BaseMvpActivity<ArticleDetailPresente
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_share:
-//                mPresenter.shareEventPermissionVerify(new RxPermissions(this));
+                mPresenter.shareEventPermissionVerify(new RxPermissions(this));
                 break;
             case R.id.item__browser:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(articleLink)));
@@ -173,6 +175,19 @@ public class ProjectDetailActivity extends BaseMvpActivity<ArticleDetailPresente
         collectEvent();
     }
 
+
+    @Override
+    public void shareEvent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_type_url, getString(R.string.app_name), title, articleLink));
+        intent.setType("text/plain");
+        startActivity(intent);
+    }
+
+    @Override
+    public void shareError() {
+        showToast(getString(R.string.write_permission_not_allowed));
+    }
 
     private void collectEvent() {
         if (!mPresenter.getLoginStatus()) {
