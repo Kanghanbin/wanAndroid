@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.fragment.HomeFragment">
+    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.HomeFragment">
 
     <q.rorbin.verticaltablayout.VerticalTabLayout
         android:id="@+id/vtl_nav"

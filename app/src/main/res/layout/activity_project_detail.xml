@@ -74,7 +74,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <kanghb.com.wanandroid.ui.customView.ProgressWebview
+        <com.kanghanbin.wanandroid.ui.customView.ProgressWebview
             android:id="@+id/view_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

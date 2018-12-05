@@ -12,8 +12,7 @@
         //沉浸状态栏
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <!-- 主要是这个起作用,修改默认toolbar返回键的颜色-->
-        <item name="android:colorControlNormal">@android:color/white</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
 
     </style>
 </resources>

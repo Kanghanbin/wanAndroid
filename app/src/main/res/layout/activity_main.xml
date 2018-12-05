@@ -5,7 +5,7 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

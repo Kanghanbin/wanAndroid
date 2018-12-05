@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/ivory"
     android:orientation="vertical"
-    tools:context=".ui.fragment.SettingFragment">
+    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.SettingFragment">
 
     <android.support.v7.widget.CardView
         android:id="@+id/setting_other_group"

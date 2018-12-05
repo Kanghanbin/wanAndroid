@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.UseActivity">
+    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.activity.UseActivity">
 
     <include layout="@layout/view_toolbar"></include>
 
