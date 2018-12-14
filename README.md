@@ -102,7 +102,7 @@ src="https://raw.githubusercontent.com/Kanghanbin/wanAndroid/master/screenshots/
 
 ### DownApk
 
-1. [点击下载](https://www.pgyer.com/s08Q)
+1. [点击下载](https://www.pgyer.com/uaHK)
 2. 扫码下载
 
       ![wanandroid](screenshots/01.png)

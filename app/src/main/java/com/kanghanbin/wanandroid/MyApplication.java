@@ -4,6 +4,9 @@ import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.blankj.utilcode.util.ProcessUtils;
+import com.kanghanbin.wanandroid.util.Constant;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
 import org.litepal.LitePal;
@@ -42,6 +45,18 @@ public class MyApplication extends Application {
                 Log.e("@@", "加载内核是否成功:" + b);
             }
         });
+        initBugly();
+    }
+
+    private void initBugly() {
+        // 获取当前包名
+        String packageName = getApplicationContext().getPackageName();
+        // 获取当前进程名
+        String processName = ProcessUtils.getCurrentProcessName();
+        // 设置是否为上报进程
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getApplicationContext());
+        strategy.setUploadProcess(processName == null || processName.equals(packageName));
+        CrashReport.initCrashReport(getApplicationContext(), Constant.BUGLY_ID, BuildConfig.DEBUG , strategy);
     }
 
     public static MyApplication getInstance() {

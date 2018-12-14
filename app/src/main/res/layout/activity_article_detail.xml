@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightgray"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.activity.ArticleDetailActivity"
     android:orientation="vertical">
 
     <include layout="@layout/view_toolbar"></include>

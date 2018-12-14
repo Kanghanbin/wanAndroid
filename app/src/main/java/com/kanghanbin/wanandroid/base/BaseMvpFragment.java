@@ -48,7 +48,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
 
     @Override
     public void showToast(String message) {
-        SnackbarUtils.with(mActivity.findViewById(android.R.id.content)).setMessage(message).setDuration(SnackbarUtils.LENGTH_SHORT).show();
+        SnackbarUtils.with(mActivity.getWindow().getDecorView()).setMessage(message).setDuration(SnackbarUtils.LENGTH_SHORT).show();
     }
 
     @Override

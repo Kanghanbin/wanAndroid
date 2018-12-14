@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+
 import com.kanghanbin.wanandroid.base.BaseListFragment;
 import com.kanghanbin.wanandroid.contract.HomeContract;
 import com.kanghanbin.wanandroid.model.bean.ArticleBean;
@@ -165,12 +166,12 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
 
     @Override
     public void showAddCollectArticle(int position, ArticleBean articleBean) {
-        adapter.setData(position,articleBean);
+        adapter.setData(position, articleBean);
     }
 
     @Override
     public void showCancelCollectArticle(int position, ArticleBean articleBean) {
-        adapter.setData(position,articleBean);
+        adapter.setData(position, articleBean);
     }
 
     private void setRefresh() {
@@ -195,7 +196,7 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
         ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, view, getString(R.string.shareView));
         ArticleBean articleBean = articleBeanList.get(position);
         IntentUtil.startArticleDetailActivity(mContext, activityOptionsCompat,
-                articleBean.getId(), articleBean.getTitle(), articleBean.getLink(), articleBean.isCollect(),false);
+                articleBean.getId(), articleBean.getTitle(), articleBean.getLink(), articleBean.isCollect(), false);
     }
 
     @Override
@@ -216,6 +217,8 @@ public class HomeFragment extends BaseListFragment<HomePresenter> implements Hom
                 } else {
                     startLoginActivity();
                 }
+                break;
+            default:
                 break;
         }
     }

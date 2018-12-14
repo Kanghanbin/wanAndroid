@@ -81,6 +81,8 @@ public class SettingFragment extends BaseMvpFragment<SettingPresenter> implement
                 mPresenter.clearCache(cache);
                 tvSettingClear.setText(mPresenter.getCacheSize4Format(cache));
                 break;
+            default:
+                break;
         }
     }
 
@@ -97,7 +99,8 @@ public class SettingFragment extends BaseMvpFragment<SettingPresenter> implement
             case R.id.cb_setting_image:
                 mPresenter.setNoImageModeState(isChecked);
                 break;
-
+            default:
+                break;
         }
     }
 

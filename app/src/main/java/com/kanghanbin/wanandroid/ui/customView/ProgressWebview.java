@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.db.SharePreferencesHelper;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -97,7 +98,6 @@ public class ProgressWebview extends WebView {
 
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-
 
             if (newProgress == 100) {
                 progressbar.setVisibility(GONE);

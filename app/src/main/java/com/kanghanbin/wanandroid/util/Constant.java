@@ -16,6 +16,8 @@ public class Constant {
 
     public static String BaseUrl = "http://www.wanandroid.com";
 
+    public static final String  BUGLY_ID = "f62f410c2f";
+
     public static final String PATH_DATA = MyApplication.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";

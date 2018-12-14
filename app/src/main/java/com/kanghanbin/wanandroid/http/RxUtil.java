@@ -1,5 +1,7 @@
 package com.kanghanbin.wanandroid.http;
 
+import android.util.Log;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.kanghanbin.wanandroid.util.Constant;
 
@@ -49,7 +51,7 @@ public class RxUtil {
             public Publisher<T> apply(Flowable<BaseResponse<T>> upstream) {
                 return upstream.flatMap(new Function<BaseResponse<T>, Flowable<T>>() {
                     @Override
-                    public Flowable<T> apply(BaseResponse<T> tBaseResponse) throws Exception {
+                    public Flowable<T> apply(BaseResponse<T> tBaseResponse) {
                         if (tBaseResponse.getErrorCode() == Constant.SUCCESS && tBaseResponse.getData() != null) {
                             return createData(tBaseResponse.getData());
                         } else {
@@ -64,6 +66,7 @@ public class RxUtil {
     /**
      * collect返回结果为null做特殊处理
      * {"data":null,"errorCode":0,"errorMsg":""}
+     *
      * @param <T>
      * @return
      */
@@ -73,7 +76,7 @@ public class RxUtil {
             public Publisher<T> apply(Flowable<BaseResponse<T>> upstream) {
                 return upstream.flatMap(new Function<BaseResponse<T>, Flowable<T>>() {
                     @Override
-                    public Flowable<T> apply(BaseResponse<T> tBaseResponse) throws Exception {
+                    public Flowable<T> apply(BaseResponse<T> tBaseResponse) {
                         if (tBaseResponse.getErrorCode() == Constant.SUCCESS && NetworkUtils.isConnected()) {
                             return (Flowable<T>) createData(new String(s));
                         } else {
@@ -95,7 +98,7 @@ public class RxUtil {
     private static <T> Flowable<T> createData(final T data) {
         return Flowable.create(new FlowableOnSubscribe<T>() {
             @Override
-            public void subscribe(FlowableEmitter<T> emitter) throws Exception {
+            public void subscribe(FlowableEmitter<T> emitter) {
                 try {
                     emitter.onNext(data);
                     emitter.onComplete();
