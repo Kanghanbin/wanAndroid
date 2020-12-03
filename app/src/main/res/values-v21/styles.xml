@@ -2,10 +2,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="DuplicateDefinition">
+        <!-- for library use when is in night theme-->
+        <item name="themeColorSecondary">@color/theme_color_secondary</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorPrimary">@color/theme_color_primary</item>
+        <item name="android:colorPrimaryDark">@color/theme_color_primary_dark</item>
+        <item name="android:colorAccent">@color/theme_color_primary_dark</item>
+        <item name="android:colorControlActivated">@color/theme_color_primary</item>
         <item name="actionMenuTextColor">#ffffff</item>
 
 

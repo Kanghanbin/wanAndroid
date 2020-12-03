@@ -10,7 +10,8 @@
             <item
                 android:id="@+id/item_wechat"
                 android:icon="@mipmap/icon_nav_wechat"
-                android:title="@string/wechat" />
+                android:title="@string/wechat"
+                />
             <item
                 android:id="@+id/item_Todo"
                 android:icon="@mipmap/icon_nav_todo"

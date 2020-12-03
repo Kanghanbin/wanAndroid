@@ -14,7 +14,7 @@ import java.io.File;
 public class Constant {
 
 
-    public static String BaseUrl = "http://www.wanandroid.com";
+    public static String BaseUrl = "https://www.wanandroid.com";
 
     public static final String  BUGLY_ID = "f62f410c2f";
 

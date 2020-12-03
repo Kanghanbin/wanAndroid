@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
+import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.ui.fragment.HierarchyListFragment;
 
@@ -46,6 +47,8 @@ public class HierarchyDetailActivity extends BaseListActivity<HierarchyDetailPre
         }
         rvMain.setAdapter(new HierarchyFragementAdapter(getSupportFragmentManager(),fragments,childrenBeans ));
         tlHierarchy.setupWithViewPager(rvMain);
+        tlHierarchy.setBackgroundColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_dark).getDefaultColor());
+        tlHierarchy.setSelectedTabIndicatorColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_trans).getDefaultColor());
     }
 
     @Override

@@ -54,7 +54,7 @@ public class LoginPresenter extends RxPresenter<LoginContract.View> implements L
             mView.showToast("用户名或密码不能为空");
             return;
         }
-        addSubscribe(apiService.register(username, password, password)
+        addSubscribe(apiService.register(username, password, repassword)
                 .compose(RxUtil.<BaseResponse<UserBean>>rxFlowableSchedulerHelper())
                 .compose(RxUtil.<UserBean>handleResult())
                 .subscribeWith(new BaseSubscriber<UserBean>(mView, MyApplication.getInstance().getString(R.string.regist_fail)) {

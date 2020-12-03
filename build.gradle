@@ -3,13 +3,20 @@ apply from:"config.gradle"
 buildscript {
     
     repositories {
-        google()
+        google()//新增
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+        maven {
+            url 'https://jitpack.io'
+        }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-        
+        classpath 'com.android.tools.build:gradle:4.1.0'
 
+        classpath 'com.google.gms:google-services:4.0.1'  //这行对谷歌服务库进行依赖
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -17,9 +24,17 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        google()//新增
         jcenter()
-        maven { url "https://jitpack.io" }
+        mavenCentral()//新增
+        maven {url 'https://dl.bintray.com/jetbrains/anko'}//新增
+        maven {
+            url "https://maven.google.com"
+        }
+        maven {
+            url 'https://jitpack.io'
+        }
+
     }
 }
 

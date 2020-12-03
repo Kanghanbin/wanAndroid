@@ -48,12 +48,12 @@ public class SettingPresenter extends RxPresenter<SettingContract.View> implemen
 
     @Override
     public void clearCache(File file) {
-        FileUtils.deleteDir(new File(Constant.PATH_CACHE));
+        FileUtils.delete(new File(Constant.PATH_CACHE));
     }
 
     @Override
     public String getCacheSize4Format(File file) {
-        return TextUtils.isEmpty(FileUtils.getDirSize(file)) ? "0K" : FileUtils.getDirSize(file);
+        return TextUtils.isEmpty(FileUtils.getSize(file)) ? "0K" : FileUtils.getSize(file);
     }
 
 }

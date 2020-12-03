@@ -9,6 +9,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.base.BaseListFragment;
 import com.kanghanbin.wanandroid.contract.ProjectContract;
@@ -69,6 +70,8 @@ public class ProjectFragment extends BaseListFragment<ProjectPresenter> implemen
         //1.Fragment嵌套Fragment要用getChildFragmentManager,所得到的是在fragment  里面子容器的管理器
         vpProject.setAdapter(new ProjectFragementAdapter(getChildFragmentManager(),fragmentList,projectBeanList));
         tlProject.setupWithViewPager(vpProject);
+        tlProject.setBackgroundColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_dark).getDefaultColor());
+        tlProject.setSelectedTabIndicatorColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_trans).getDefaultColor());
         vpProject.setCurrentItem(0);
     }
 

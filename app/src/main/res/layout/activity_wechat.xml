@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray"
     android:orientation="vertical"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.HomeFragment">
+    tools:context="com.kanghanbin.wanandroid.ui.fragment.HomeFragment">
     <include layout="@layout/view_toolbar"></include>
     <android.support.design.widget.TabLayout
         android:id="@+id/tl_wechat"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/colorAccent"
+        android:background="@color/theme_color_primary"
+        app:tabIndicatorColor="@color/theme_color_primary"
         app:tabIndicatorHeight="@dimen/dp_4"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"

@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.bilibili.magicasakura.widgets.TintProgressBar;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.db.SharePreferencesHelper;
@@ -46,7 +47,7 @@ public class ProgressWebview extends WebView {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         //创建进度条
-        progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        progressbar = new TintProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
         //设置加载进度条的高度
         progressbar.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, progressHeight));
 

@@ -6,29 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray"
     android:orientation="vertical"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.HomeFragment">
+    tools:context="com.kanghanbin.wanandroid.ui.fragment.HomeFragment">
     <!--<include layout="@layout/view_toolbar"></include>-->
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlHeaderHeight="@dimen/dp_100"
-        app:srlPrimaryColor="@color/colorPrimary">
+        android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.DeliveryHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.scwang.smartrefresh.header.DeliveryHeader>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAnimatingColor="@color/colorPrimary"
-            app:srlNormalColor="@color/colorPrimary"></com.scwang.smartrefresh.layout.footer.BallPulseFooter>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

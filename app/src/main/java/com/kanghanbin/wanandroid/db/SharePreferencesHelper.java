@@ -1,9 +1,12 @@
 package com.kanghanbin.wanandroid.db;
 
+import android.support.v4.content.ContextCompat;
+
 import com.blankj.utilcode.util.SPUtils;
 
 import java.util.HashSet;
 
+import com.kanghanbin.wanandroid.MyApplication;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.util.Constant;
 
@@ -18,7 +21,7 @@ public class SharePreferencesHelper implements ISharePreference {
     private SPUtils spUtils;
 
     private SharePreferencesHelper() {
-        spUtils = SPUtils.getInstance(R.string.app_name);
+        spUtils = SPUtils.getInstance(MyApplication.getInstance().getString(R.string.app_name));
     }
 
     public static SharePreferencesHelper getInstance() {

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/dp_60"
     android:paddingTop="@dimen/dp_60"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.activity.SplashActivity">
+    tools:context="com.kanghanbin.wanandroid.ui.activity.SplashActivity">
 
 
     <TextView

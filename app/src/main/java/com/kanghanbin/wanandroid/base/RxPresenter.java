@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
  */
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     protected T mView;
-    private CompositeDisposable mCompositeDisposable;
+    protected CompositeDisposable mCompositeDisposable;
     protected SharePreferencesHelper sharePreferencesHelper;
     protected ApiService apiService;
 
@@ -26,15 +26,15 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         sharePreferencesHelper = SharePreferencesHelper.getInstance();
     }
 
-    protected void addSubscribe(Disposable disposable){
-        if(mCompositeDisposable == null){
+    protected void addSubscribe(Disposable disposable) {
+        if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(disposable);
     }
 
-    protected void unSubscribe(){
-        if(mCompositeDisposable != null){
+    protected void unSubscribe() {
+        if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
     }
@@ -49,7 +49,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         this.mView = null;
         unSubscribe();
     }
-
 
 
     @Override

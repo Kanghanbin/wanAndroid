@@ -5,18 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.HomeFragment">
+    tools:context="com.kanghanbin.wanandroid.ui.fragment.HomeFragment">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlHeaderHeight="@dimen/dp_100"
-        app:srlPrimaryColor="@color/colorPrimary">
-
-        <com.scwang.smartrefresh.header.DeliveryHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.scwang.smartrefresh.header.DeliveryHeader>
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_main"

@@ -91,7 +91,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 gotoLogin();
                 break;
             case R.id.btn_regist:
-                mPresenter.regist(registerPhone.getText().toString().trim(), registerPhone.getText().toString().trim(), secondPassword.getText().toString().trim());
+                mPresenter.regist(registerPhone.getText().toString().trim(), registerPassword.getText().toString().trim(), secondPassword.getText().toString().trim());
                 break;
         }
     }

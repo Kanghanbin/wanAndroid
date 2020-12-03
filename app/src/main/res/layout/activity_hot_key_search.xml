@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.activity.HotKeySearchActivity">
+    tools:context="com.kanghanbin.wanandroid.ui.activity.HotKeySearchActivity">
 
     <include layout="@layout/search_toolbar"></include>
 

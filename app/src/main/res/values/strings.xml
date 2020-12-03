@@ -80,4 +80,7 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="share_type_url">%1$s 分享\n标题：%2$s\n 链接：%3$s</string>
     <string name="write_permission_not_allowed">读写权限不允许</string>
+    <string name="theme_skin">主题换肤</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
 </resources>

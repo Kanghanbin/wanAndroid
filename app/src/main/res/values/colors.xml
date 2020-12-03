@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/theme_color_primary</color>
+    <color name="colorPrimaryDark">@color/theme_color_primary_dark</color>
+    <color name="colorAccent">@color/theme_color_primary_dark</color>
 
 
     <color name="transparent">#0000</color>
     <color name="white">#FFFFFFFF</color> <!--白色 -->
     <color name="ivory">#FFFFF0</color> <!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color> <!--亮黄色 -->
-    <color name="yellow">#FFFF00</color> <!--黄色 -->
+    <!--<color name="yellow">#FFFF00</color> &lt;!&ndash;黄色 &ndash;&gt;-->
     <color name="snow">#FFFAFA</color> <!--雪白色 -->
     <color name="floralwhite">#FFFAF0</color> <!--花白色 -->
     <color name="lemonchiffon">#FFFACD</color> <!--柠檬绸色 -->
@@ -24,9 +24,9 @@
     <color name="navajowhite">#FFDEAD</color> <!--纳瓦白 -->
     <color name="peachpuff">#FFDAB9</color> <!--桃色 -->
     <color name="gold">#FFD700</color> <!--金色 -->
-    <color name="pink">#FFC0CB</color> <!--粉红色 -->
+    <!--<color name="pink">#FFC0CB</color> &lt;!&ndash;粉红色 &ndash;&gt;-->
     <color name="lightpink">#FFB6C1</color> <!--亮粉红色 -->
-    <color name="orange">#FFA500</color> <!--橙色 -->
+    <!--<color name="orange">#FFA500</color> &lt;!&ndash;橙色 &ndash;&gt;-->
     <color name="lightsalmon">#FFA07A</color> <!--亮肉色 -->
     <color name="darkorange">#FF8C00</color> <!--暗桔黄色 -->
     <color name="coral">#FF7F50</color> <!--珊瑚色 -->
@@ -36,7 +36,7 @@
     <color name="deeppink">#FF1493</color> <!--深粉红色 -->
     <color name="fuchsia">#FF00FF</color> <!--紫红色 -->
     <color name="magenta">#FF00FF</color> <!--红紫色 -->
-    <color name="red">#FF0000</color> <!--红色 -->
+    <!--<color name="red">#FF0000</color> &lt;!&ndash;红色 &ndash;&gt;-->
     <color name="oldlace">#FDF5E6</color> <!--老花色 -->
     <color name="lightgoldenrodyellow">#FAFAD2</color> <!--亮金黄色 -->
     <color name="linen">#FAF0E6</color> <!--亚麻色 -->
@@ -102,7 +102,7 @@
     <color name="gray">#808080</color> <!--灰色 -->
     <color name="grey">#808080</color> <!--灰色 -->
     <color name="olive">#808000</color> <!--橄榄色 -->
-    <color name="purple">#800080</color> <!--紫色 -->
+    <!--<color name="purple">#800080</color> &lt;!&ndash;紫色 &ndash;&gt;-->
     <color name="maroon">#800000</color> <!--粟色 -->
     <color name="aquamarine">#7FFFD4</color> <!--碧绿色 -->
     <color name="chartreuse">#7FFF00</color> <!--黄绿色 -->
@@ -144,16 +144,14 @@
     <color name="deepskyblue">#00BFFF</color> <!--深天蓝色 -->
     <color name="darkcyan">#008B8B</color> <!--暗青色 -->
     <color name="teal">#008080</color> <!--水鸭色 -->
-    <color name="green">#008000</color> <!--绿色 -->
+    <!--<color name="green">#008000</color> &lt;!&ndash;绿色 &ndash;&gt;-->
     <color name="darkgreen">#006400</color> <!--暗绿色 -->
-    <color name="blue">#0000FF</color> <!--蓝色 -->
+    <!--<color name="blue">#0000FF</color> &lt;!&ndash;蓝色 &ndash;&gt;-->
     <color name="mediumblue">#0000CD</color> <!--中兰色 -->
     <color name="darkblue">#00008B</color> <!--暗蓝色 -->
     <color name="navy">#000080</color> <!--海军色 -->
     <color name="black">#000000</color> <!--黑色 -->
     <color name="delete_text">#cccccc</color>
-
-
 
     <color name="blue_50">#e3f2fD</color>
     <color name="blue_300">#64B5F6</color>
@@ -188,5 +186,43 @@
     <color name="dark_30_percent">#4d000000</color>
     <color name="dark_50_percent">#80000000</color>
     <color name="dark_70_percent">#b3000000</color>
+
+
+    <color name="theme_color_primary">#2196F3</color>
+    <color name="theme_color_primary_dark">#1565C0</color>
+    <color name="theme_color_primary_trans">#B41A78C3</color>
+    <color name="theme_color_secondary">#2196F3</color>
+    <!-- theme color -->
+    <color name="pink">#fb7299</color>
+    <color name="pink_dark">#b85671</color>
+    <color name="pink_trans">#99f0486c</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="blue_dark">#1565C0</color>
+    <color name="blue_trans">#B41A78C3</color>
+
+    <color name="purple">#673AB7</color>
+    <color name="purple_dark">#311B92</color>
+    <color name="purple_trans">#99673AB7</color>
+
+    <color name="green">#4CAF50</color>
+    <color name="green_dark">#2E7D32</color>
+    <color name="green_trans">#994CAF50</color>
+
+    <color name="green_light">#8BC34A</color>
+    <color name="green_light_dark">#558B2F</color>
+    <color name="green_light_trans">#998BC34A</color>
+
+    <color name="yellow">#FDD835</color>
+    <color name="yellow_dark">#FBC02D</color>
+    <color name="yellow_trans">#99FDD835</color>
+
+    <color name="orange">#FF9800</color>
+    <color name="orange_dark">#EF6C00</color>
+    <color name="orange_trans">#99FF9800</color>
+
+    <color name="red">#F44336</color>
+    <color name="red_dark">#C62828</color>
+    <color name="red_trans">#99F44336</color>
 
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray"
     android:orientation="vertical"
-    tools:context="com.kanghanbin.wanandroid.comm.kanghanbin1.wanandroid.ui.fragment.HomeFragment">
+    tools:context="com.kanghanbin.wanandroid.ui.fragment.HomeFragment">
 
     <include layout="@layout/view_toolbar"></include>
 
@@ -14,13 +14,7 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlHeaderHeight="@dimen/dp_100"
-        app:srlPrimaryColor="@color/colorPrimary">
-
-        <com.scwang.smartrefresh.header.DeliveryHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.scwang.smartrefresh.header.DeliveryHeader>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,11 +133,7 @@
                 android:paddingTop="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAnimatingColor="@color/colorPrimary"
-            app:srlNormalColor="@color/colorPrimary"></com.scwang.smartrefresh.layout.footer.BallPulseFooter>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <!--<android.support.v4.view.ViewPager-->

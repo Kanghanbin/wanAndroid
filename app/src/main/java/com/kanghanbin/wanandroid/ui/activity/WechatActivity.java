@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.kanghanbin.wanandroid.R;
 import com.kanghanbin.wanandroid.ui.fragment.WechatListFragment;
 
@@ -83,6 +84,8 @@ public class WechatActivity extends BaseListActivity<WechatPresenter> implements
         }
         rvMain.setAdapter(new WechatFragementAdapter(getSupportFragmentManager(),listFragments,articleBeanList));
         tlWechat.setupWithViewPager(rvMain);
+        tlWechat.setBackgroundColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_dark).getDefaultColor());
+        tlWechat.setSelectedTabIndicatorColor(ThemeUtils.getThemeColorStateList(mContext,R.color.theme_color_primary_trans).getDefaultColor());
     }
 
 }
